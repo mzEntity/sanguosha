@@ -55,17 +55,24 @@ public class Game extends Action {
         return game.board.area.drawArea.available;
     }
 
+    public static List<Role> getRoles(){
+        return game.roles;
+    }
+
     @Override
     protected void mainLogic(Action from) {
         for(int i = 0; i < 50; i++){
-            boolean hasLiving = false;
+            int liveCount = 0;
             for(Role r: roles){
                 if(r.isAlive()){
-                    hasLiving = true;
+                    liveCount += 1;
                     new Turn(r).process(this);
+                } else {
+                    Logger.printf("玩家%s已死亡，跳过回合\n", r.code);
                 }
             }
-            if(!hasLiving){
+            if(liveCount <= 1){
+                Logger.printf("仅剩%s名玩家，游戏结束\n", liveCount);
                 break;
             }
         }

@@ -1,9 +1,17 @@
 package org.example.game.action.stage;
 
 
+import org.example.game.action.process.UseProcess;
+import org.example.game.board.card.Card;
+import org.example.game.board.card.Deck;
+import org.example.game.board.card.logic.SB01;
+import org.example.game.filter.FilterTable;
 import org.example.game.role.Role;
 import org.example.game.action.Action;
 import org.example.log.Logger;
+import org.example.tools.FileOperator;
+
+import java.util.List;
 
 
 public class PunchingStage extends Action {
@@ -14,34 +22,33 @@ public class PunchingStage extends Action {
     @Override
     protected void mainLogic(Action from) {
         Logger.printf("PunchingStage:出牌阶段\n");
-//        Deck handDeck = this.subject.playerArea.handArea.cards;
+        Deck handDeck = this.subject.getHandDeck();
 //        tryToSUS06(handDeck);
 //        tryToSUS05(handDeck);
 //        tryToSUS04(handDeck);
 //        tryToSUS03(handDeck);
 //        tryToSUS07(handDeck);
-//        tryToSB01(handDeck);
+        tryToSB01(handDeck);
 //        tryToSB03(handDeck);
 //        tryToSUS01(handDeck);
 //        tryToSUS02(handDeck);
 //        tryToSUS08(handDeck);
     }
 
-//    private void tryToSB01(Deck handDeck){
-//        Deck cardDeck = handDeck.containCard("SB01");
-//        if(cardDeck != null){
-//            List<Role> allRoles = Game.getGame().roles;
-//            List<Role> allTargets = FilterTable.getFilter("SB01").filterTargets(this.subject, allRoles);
-//            if(allTargets.isEmpty()){
-//               Logger.printf("[杀]: 没有可用的目标\n");
-//               return;
-//            }
-//            Card card = cardDeck.getCard(0);
-//            List<Role> targets = allTargets.subList(0, 1);
-//            Logger.printf("[杀]: %s对%s出杀\n", this.subject.code, targets.get(0).code);
-//            new Use_SB01_Action(this.subject, new LogicCard(cardDeck, card), targets).process(this);
-//        }
-//    }
+    private void tryToSB01(Deck handDeck){
+        Deck cardDeck = handDeck.containCard("SB01");
+        if(cardDeck != null){
+            List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SB01");
+            if(allTargets.isEmpty()){
+               Logger.printf("[杀]: 没有可用的目标\n");
+               return;
+            }
+            Card card = cardDeck.getCard(0);
+            List<Role> targets = allTargets.subList(0, 1);
+            Logger.printf("[杀]: %s对%s出杀\n", this.subject.code, targets.get(0).code);
+            new UseProcess(this.subject, targets, new SB01(cardDeck, card)).process(this);
+        }
+    }
 //
 //    private void tryToSB03(Deck handDeck){
 //        Deck cardDeck = handDeck.containCard("SB03");

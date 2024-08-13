@@ -41,6 +41,22 @@ public class Role {
         return this.condition.isAlive();
     }
 
+    public void gainHp(int count){
+        this.condition.hp += count;
+    }
+
+    public void loseHp(int count){
+        this.condition.hp -= count;
+    }
+
+    public boolean isDying(){
+        return this.condition.hp <= 0;
+    }
+
+    public void die(){
+        this.condition.isAlive = false;
+    }
+
     @Override
     public String toString() {
         return "Role{" +

@@ -26,7 +26,8 @@ public class InjurySettleProcess extends Action {
         TriggerTable.processBefore(this, TriggerIdentifier.build("HURT_" + this.to.code));
 
         // TODO: 受伤
-        boolean isDying = false;
+        this.to.loseHp(1);
+        boolean isDying = this.to.isDying();
         if(isDying){
             new DyingProcess(this.to).process(this);
         }

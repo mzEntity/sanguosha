@@ -3,7 +3,7 @@ package org.example.game.role.hero;
 public class Condition {
     public int hpMax;
     public int hp;
-    private boolean isAlive;
+    public boolean isAlive;
 
     public Condition(int hpMax, int hp) {
         this.hpMax = hpMax;
