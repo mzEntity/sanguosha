@@ -31,12 +31,26 @@ public class Turn extends Action {
 
     @Override
     protected void mainLogic(Action from) {
-        this.turnStartStage.process(this);
-        this.preparationStage.process(this);
-        this.divinationStage.process(this);
-        this.drawStage.process(this);
-        this.punchingStage.process(this);
-        this.discardingStage.process(this);
-        this.turnFinishStage.process(this);
+        if(this.subject.isAlive()){
+            this.turnStartStage.process(this);
+        }
+        if(this.subject.isAlive()){
+            this.preparationStage.process(this);
+        }
+        if(this.subject.isAlive()){
+            this.divinationStage.process(this);
+        }
+        if(this.subject.isAlive()){
+            this.drawStage.process(this);
+        }
+        if(this.subject.isAlive()){
+            this.punchingStage.process(this);
+        }
+        if(this.subject.isAlive()){
+            this.discardingStage.process(this);
+        }
+        if(this.subject.isAlive()){
+            this.turnFinishStage.process(this);
+        }
     }
 }

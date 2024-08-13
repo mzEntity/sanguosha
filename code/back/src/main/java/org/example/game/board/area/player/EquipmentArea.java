@@ -14,4 +14,13 @@ public class EquipmentArea {
         this.retreatMount = retreatMount;
         this.marchMount = marchMount;
     }
+
+    public Deck getAllEquipments(){
+        Deck newDeck = new Deck();
+        this.weapon.moveAllToBack(newDeck);
+        this.armor.moveAllToBack(newDeck);
+        this.retreatMount.moveAllToBack(newDeck);
+        this.marchMount.moveAllToBack(newDeck);
+        return newDeck;
+    }
 }

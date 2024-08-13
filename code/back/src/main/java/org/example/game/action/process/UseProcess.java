@@ -3,6 +3,7 @@ package org.example.game.action.process;
 import org.example.game.action.Action;
 import org.example.game.action.TriggerIdentifier;
 import org.example.game.action.TriggerTable;
+import org.example.game.action.trigger.MoveToDiscardAreaAction;
 import org.example.game.board.card.logic.LogicCard;
 import org.example.game.role.Role;
 
@@ -38,5 +39,6 @@ public class UseProcess extends Action {
         TriggerTable.processBefore(this, TriggerIdentifier.build("WORK_" + logicCard.getId() + "_" + subject.code));
         this.logicCard.process(this, this.subject, this.targets);
         TriggerTable.processAfter(this, TriggerIdentifier.build("WORK_" + logicCard.getId() + "_" + subject.code));
+        new MoveToDiscardAreaAction(this.subject, this.logicCard.getPhysicalCard()).process(this);
     }
 }

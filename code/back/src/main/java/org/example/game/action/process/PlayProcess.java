@@ -3,6 +3,7 @@ package org.example.game.action.process;
 import org.example.game.action.Action;
 import org.example.game.action.TriggerIdentifier;
 import org.example.game.action.TriggerTable;
+import org.example.game.action.trigger.MoveToDiscardAreaAction;
 import org.example.game.board.card.logic.LogicCard;
 import org.example.game.role.Role;
 
@@ -23,5 +24,6 @@ public class PlayProcess extends Action{
 
     @Override
     protected void mainLogic(Action from) {
+        new MoveToDiscardAreaAction(this.subject, this.logicCard.getPhysicalCard()).process(this);
     }
 }

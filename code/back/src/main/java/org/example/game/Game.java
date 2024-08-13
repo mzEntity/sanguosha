@@ -59,6 +59,16 @@ public class Game extends Action {
         return game.roles;
     }
 
+    public boolean noMoreThanOneLeft(){
+        int liveCount = 0;
+        for(Role r: this.roles){
+            if(r.isAlive()){
+                liveCount++;
+            }
+        }
+        return liveCount <= 1;
+    }
+
     @Override
     protected void mainLogic(Action from) {
         for(int i = 0; i < 50; i++){

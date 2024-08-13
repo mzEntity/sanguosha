@@ -21,7 +21,10 @@ public class MoveToDiscardAreaAction extends Action {
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("置入弃牌堆的牌：%s", this.targetDeck);
+        if(this.targetDeck.size() <= 0){
+            return;
+        }
+        Logger.printf("置入弃牌堆的牌：%s\n", this.targetDeck);
         Deck discardAreaDeck = Game.getDiscardDeck();
         this.targetDeck.moveAllToBack(discardAreaDeck);
     }
