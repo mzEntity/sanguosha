@@ -46,7 +46,7 @@ public class PunchingStage extends Action {
             Card card = cardDeck.getCard(0);
             List<Role> targets = allTargets.subList(0, 1);
             Logger.printf("[杀]: %s对%s出杀\n", this.subject.code, targets.get(0).code);
-            new UseProcess(this.subject, targets, new SB01(cardDeck, card)).process(this);
+            new UseProcess(this.subject, targets, new SB01(cardDeck)).process(this);
         }
     }
 //

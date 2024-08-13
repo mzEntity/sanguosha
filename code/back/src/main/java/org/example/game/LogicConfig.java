@@ -20,6 +20,7 @@ public class LogicConfig {
     public void initLogic(){
         this.initActionTrigger();
         this.initTargetFilter();
+        this.initCardRequirement();
     }
 
     public void initActionTrigger(){
@@ -33,5 +34,9 @@ public class LogicConfig {
                 ))
         );
         FilterTable.setFilter("SB01", SB01_filter);
+    }
+
+    public void initCardRequirement(){
+
     }
 }

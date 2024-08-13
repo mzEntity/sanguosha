@@ -10,12 +10,16 @@ import java.util.List;
 
 public abstract class LogicCard {
     private Deck physicalCard;
-
     private Card logicCard;
 
     public LogicCard(Deck physicalCard, Card logicCard) {
         this.physicalCard = physicalCard;
         this.logicCard = logicCard;
+    }
+
+    public LogicCard(Deck physicalCard) {
+        this.physicalCard = physicalCard;
+        this.logicCard = null;
     }
 
     public abstract void process(Action useProcess, Role subject, List<Role> targets);

@@ -4,6 +4,7 @@ import org.example.game.action.Action;
 import org.example.game.action.process.InjurySettleProcess;
 import org.example.game.board.card.Card;
 import org.example.game.board.card.Deck;
+import org.example.game.board.card.Suit;
 import org.example.game.role.Role;
 
 import java.util.List;
@@ -14,8 +15,8 @@ import java.util.List;
  * @Date: 2024/8/12
  */
 public class SB01 extends LogicCard {
-    public SB01(Deck physicalCard, Card logicCard) {
-        super(physicalCard, logicCard);
+    public SB01(Deck physicalCard) {
+        super(physicalCard, physicalCard.transform("SB01"));
     }
 
     @Override

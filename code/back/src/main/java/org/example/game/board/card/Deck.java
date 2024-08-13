@@ -127,6 +127,24 @@ public class Deck {
         return insertCount;
     }
 
+    public Card transform(String id){
+        Suit suit = null;
+        for(Card c: this.cards){
+            if(suit == null || suit.equals(c.suit)){
+                suit = c.suit;
+            } else if(suit.getColor() == c.suit.getColor()){
+                suit = suit.removeColor();
+            } else {
+                suit = Suit.None;
+            }
+        }
+        int point = 0;
+        if(this.size() == 1){
+            point = this.cards.get(0).point;
+        }
+        return new Card(suit, point, id);
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder("Deck(");

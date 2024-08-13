@@ -32,6 +32,14 @@ public enum Suit{
         return this.color;
     }
 
+    public Suit removeColor(){
+        return switch (this) {
+            case Heart, Diamond, Red_None -> Red_None;
+            case Club, Spade, Black_None -> Black_None;
+            default -> None;
+        };
+    }
+
     @Override
     public String toString() {
         return name;
