@@ -6,7 +6,7 @@ import org.example.log.Logger;
 
 public class TurnFinishStage extends Action {
     public TurnFinishStage(Role subject) {
-        super("TurnFinishStage", subject);
+        super(subject);
     }
 
     @Override

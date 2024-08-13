@@ -1,14 +1,15 @@
 package org.example.game.board.card.logic;
 
+import org.example.game.action.Action;
+import org.example.game.action.process.InjurySettleProcess;
 import org.example.game.board.card.Card;
 import org.example.game.board.card.Deck;
 import org.example.game.role.Role;
-import org.example.log.Logger;
 
 import java.util.List;
 
 /**
- * @Description:
+ * @Description: 基本牌：杀
  * @Author: mzvltr
  * @Date: 2024/8/12
  */
@@ -18,7 +19,9 @@ public class SB01 extends LogicCard {
     }
 
     @Override
-    public void process(Role subject, List<Role> targets) {
-
+    public void process(Action useProcess, Role subject, List<Role> targets) {
+        for(Role target : targets) {
+            new InjurySettleProcess(subject, target).process(useProcess);
+        }
     }
 }

@@ -15,7 +15,7 @@ public class InjurySettleProcess extends Action {
     private Role to;
 
     public InjurySettleProcess(Role subject, Role target) {
-        super("INJURYSETTLE", target);
+        super(target);
         this.by = subject;
         this.to = target;
     }
@@ -26,6 +26,10 @@ public class InjurySettleProcess extends Action {
         TriggerTable.processBefore(this, TriggerIdentifier.build("HURT_" + this.to.code));
 
         // TODO: 受伤
+        boolean isDying = false;
+        if(isDying){
+            new DyingProcess(this.to).process(this);
+        }
 
         TriggerTable.processAfter(this, TriggerIdentifier.build("DAMAGE_" + this.by.code));
         TriggerTable.processAfter(this, TriggerIdentifier.build("HURT_" + this.to.code));

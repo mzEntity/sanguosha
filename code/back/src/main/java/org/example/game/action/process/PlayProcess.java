@@ -17,7 +17,7 @@ public class PlayProcess extends Action{
     private LogicCard logicCard;
 
     public PlayProcess(Role subject, LogicCard logicCard) {
-        super("PLAY" + logicCard.getId(), subject);
+        super(subject);
         this.logicCard = logicCard;
     }
 

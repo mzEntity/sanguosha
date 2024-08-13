@@ -1,9 +1,11 @@
 package org.example.game;
 
+import org.example.game.action.Turn;
 import org.example.game.board.card.CardDict;
 import org.example.game.action.Action;
 import org.example.game.board.Board;
 import org.example.game.board.card.Card;
+import org.example.game.board.card.Deck;
 import org.example.game.role.Role;
 import org.example.game.role.hero.Hero;
 import org.example.log.Logger;
@@ -19,14 +21,11 @@ public class Game extends Action {
     public List<Role> roles;
     public Role activeRole;
 
-    public List<List<Integer>> distance;
-
     public Board board;
 
     private Game() {
-        super("Game", null);
+        super(null);
         this.activeRole = null;
-        this.distance = new ArrayList<>();
     }
 
     public static Game getGame(){
@@ -39,59 +38,36 @@ public class Game extends Action {
         }
 
         for(Role role: this.roles){
-            role.setHero(new Hero(3, "Default Hero"));
+            role.setHero(new Hero(3, 3, "Default Hero"));
         }
 
-        new LogicConfig(this.roles).initLogic();
+        new LogicConfig().initLogic();
 
         this.process(null);
         return true;
     }
 
+    public static Deck getDiscardDeck(){
+        return game.board.area.discardArea.discardedCards;
+    }
+
+    public static Deck getDrawDeck(){
+        return game.board.area.drawArea.available;
+    }
+
     @Override
     protected void mainLogic(Action from) {
         for(int i = 0; i < 50; i++){
+            boolean hasLiving = false;
             for(Role r: roles){
-                if(r.getHero().condition.alive){
-                    r.turn.process(this);
+                if(r.isAlive()){
+                    hasLiving = true;
+                    new Turn(r).process(this);
                 }
             }
-        }
-    }
-
-    public int getAliveRoleCount(){
-        int count = 0;
-        for(Role r: this.roles){
-            if(r.getHero().condition.alive){
-                count++;
+            if(!hasLiving){
+                break;
             }
         }
-        return count;
     }
-
-    public void printDistance(){
-        int roleCount = this.roles.size();
-        Logger.printf("    ");
-        for(int i = 0; i < roleCount; i++){
-            Logger.printf("%2d\t", i);
-        }
-        Logger.printf("\n");
-        for(int i = 0; i < roleCount; i++){
-            Logger.printf("%2d  ", i);
-            for(int j = 0; j < roleCount; j++){
-                Logger.printf("%2d\t", this.distance.get(i).get(j));
-            }
-            Logger.printf("\n");
-        }
-    }
-
-    public static void main(String[] args) {
-        CardDict.initCardDict();
-
-        int roleNum = 5;
-        Game game = new GameBuilder().buildGame(roleNum);
-        game.start();
-    }
-
-
 }

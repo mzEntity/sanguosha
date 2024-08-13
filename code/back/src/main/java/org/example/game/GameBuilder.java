@@ -19,52 +19,26 @@ public class GameBuilder {
     public Game buildGame(int playerCount){
         Board board = new BoardBuilder().buildBoard(playerCount);
         List<Card> cardList = this.prepareCards();
-        List<Role> roles = new ArrayList<>();
-        for(int i = 0; i < playerCount; i++){
-            Role role = this.buildRole(i, board.area.playerAreas.get(i));
-            roles.add(role);
-        }
-        for(int i = 0; i < playerCount; i++){
-            int leftIndex = (i + playerCount - 1) % playerCount;
-            int rightIndex = (i + 1) % playerCount;
-            Role role = roles.get(i);
-            role.left = roles.get(leftIndex);
-            role.right = roles.get(rightIndex);
-        }
+        List<Role> roles = this.prepareRoles(playerCount, board);
+
         Game game = Game.getGame();
         assert cardList != null;
         game.cards = new ArrayList<>(cardList);
         game.roles = roles;
         game.board = board;
         Deck.prepareDeck(cardList).moveAllToBack(game.board.area.discardArea.discardedCards);
-        List<List<Integer>> distance = new ArrayList<>();
-        for(int i = 0; i < playerCount; i++){
-            distance.add(new ArrayList<>());
-            for(int j = 0; j < playerCount; j++){
-                int tmp = Math.abs(i - j);
-                distance.get(i).add(Math.min(tmp, playerCount - tmp));
-            }
-        }
-        game.distance = distance;
+
         return game;
     }
 
-    public Role buildRole(int playerId, PlayerArea playerArea){
-        Role role = new Role(playerId);
-
-        Turn turn = new Turn(role);
-        turn.turnStartStage = new TurnStartStage(role);
-        turn.preparationStage = new PreparationStage(role);
-        turn.divinationStage = new DivinationStage(role);
-        turn.drawStage = new DrawStage(role);
-        turn.punchingStage = new PunchingStage(role);
-        turn.discardingStage = new DiscardingStage(role);
-        turn.turnFinishStage = new TurnFinishStage(role);
-
-        role.turn = turn;
-
-        role.matchArea(playerArea);
-        return role;
+    private List<Role> prepareRoles(int playerCount, Board board){
+        List<Role> roles = new ArrayList<>();
+        for(int i = 0; i < playerCount; i++){
+            Role role = new Role(i);
+            role.matchArea(board.area.playerAreas.get(i));
+            roles.add(role);
+        }
+        return roles;
     }
 
     private List<Card> prepareCards(){

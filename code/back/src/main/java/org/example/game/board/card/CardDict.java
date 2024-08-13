@@ -8,13 +8,14 @@ import java.util.List;
 public class CardDict {
     private static HashMap<String, String> cardDict = new HashMap<>();
 
-    public static void initCardDict(){
+    static {
         List<String> lines = FileOperator.readFile("./src/main/resources/cards.txt");
         for(String line: lines){
             String[] arr = line.split(" ");
             cardDict.put(arr[0], arr[1]);
         }
     }
+
 
     public static String getCardName(String cardId){
         if(!cardDict.containsKey(cardId)){

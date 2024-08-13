@@ -6,23 +6,31 @@ import org.example.game.role.Role;
 
 
 public class Turn extends Action {
-    public TurnStartStage turnStartStage;
-    public PreparationStage preparationStage;
-    public DivinationStage divinationStage;
-    public DrawStage drawStage;
-    public PunchingStage punchingStage;
-    public DiscardingStage discardingStage;
-    public TurnFinishStage turnFinishStage;
+    private final TurnStartStage turnStartStage;
+    private final PreparationStage preparationStage;
+    private final DivinationStage divinationStage;
+    private final DrawStage drawStage;
+    private final PunchingStage punchingStage;
+    private final DiscardingStage discardingStage;
+    private final TurnFinishStage turnFinishStage;
+
+    public int handLimit;
 
     public Turn(Role subject) {
-        super("Turn", subject);
+        super(subject);
+        this.turnStartStage = new TurnStartStage(subject);
+        this.preparationStage = new PreparationStage(subject);
+        this.divinationStage = new DivinationStage(subject);
+        this.drawStage = new DrawStage(subject);
+        this.punchingStage = new PunchingStage(subject);
+        this.discardingStage = new DiscardingStage(subject, this);
+        this.turnFinishStage = new TurnFinishStage(subject);
+        this.handLimit = subject.condition.hp;
     }
 
 
     @Override
     protected void mainLogic(Action from) {
-        Game game = Game.getGame();
-        game.activeRole = this.subject;
         this.turnStartStage.process(this);
         this.preparationStage.process(this);
         this.divinationStage.process(this);

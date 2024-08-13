@@ -6,7 +6,7 @@ import org.example.log.Logger;
 
 public class PreparationStage extends Action {
     public PreparationStage(Role subject) {
-        super("PreparationStage", subject);
+        super(subject);
     }
 
     @Override

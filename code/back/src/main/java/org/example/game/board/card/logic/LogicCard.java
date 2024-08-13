@@ -1,6 +1,7 @@
 package org.example.game.board.card.logic;
 
 import org.example.game.Game;
+import org.example.game.action.Action;
 import org.example.game.board.card.Card;
 import org.example.game.board.card.Deck;
 import org.example.game.role.Role;
@@ -17,7 +18,7 @@ public abstract class LogicCard {
         this.logicCard = logicCard;
     }
 
-    public abstract void process(Role subject, List<Role> targets);
+    public abstract void process(Action useProcess, Role subject, List<Role> targets);
 
     public Deck getPhysicalCard() {
         return physicalCard;

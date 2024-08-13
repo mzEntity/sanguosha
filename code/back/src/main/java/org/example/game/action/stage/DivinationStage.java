@@ -6,7 +6,7 @@ import org.example.log.Logger;
 
 public class DivinationStage extends Action {
     public DivinationStage(Role subject) {
-        super("DivinationStage", subject);
+        super(subject);
     }
 
     @Override

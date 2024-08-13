@@ -2,19 +2,17 @@ package org.example.game.role;
 
 import org.example.game.board.area.player.PlayerArea;
 import org.example.game.action.Turn;
+import org.example.game.board.card.Deck;
+import org.example.game.role.hero.Condition;
 import org.example.game.role.hero.Hero;
 
 public class Role {
 
     public String code;
     public int id;
-    public Turn turn;
     public PlayerArea playerArea;
 
-    public Role left;
-    public Role right;
-
-    public int attackRange;
+    public Condition condition;
 
     private Hero hero;
 
@@ -22,8 +20,11 @@ public class Role {
         this.id = id;
         this.playerArea = null;
         this.code = id + "";
-        this.attackRange = 1;
         this.hero = null;
+    }
+
+    public Deck getHandDeck(){
+        return this.playerArea.handArea.cards;
     }
 
     public void matchArea(PlayerArea playerArea){
@@ -32,6 +33,12 @@ public class Role {
 
     public void setHero(Hero hero){
         this.hero = hero;
+        Condition initCondition = hero.getInitCondition();
+        this.condition = new Condition(initCondition.hpMax, initCondition.hp);
+    }
+
+    public boolean isAlive(){
+        return this.condition.isAlive();
     }
 
     @Override
@@ -40,9 +47,4 @@ public class Role {
                 "id=" + id +
                 '}';
     }
-
-    public Hero getHero() {
-        return this.hero;
-    }
-
 }

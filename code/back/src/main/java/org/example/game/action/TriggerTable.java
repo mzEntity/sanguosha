@@ -124,7 +124,7 @@ public class TriggerTable {
         TriggerIdentifier tid1 = TriggerIdentifier.build("TID1");
         TriggerIdentifier tid3 = TriggerIdentifier.build("TID3");
 
-        Action action = new Action("HI", null) {
+        Action action = new Action(null) {
             @Override
             public void process(Action from) {
                 super.process(from);
@@ -134,25 +134,6 @@ public class TriggerTable {
             protected void mainLogic(Action from) {
             }
 
-            @Override
-            public void registerBefore(Action target) {
-                super.registerBefore(target);
-            }
-
-            @Override
-            public void registerAfter(Action target) {
-                super.registerAfter(target);
-            }
-
-            @Override
-            protected void notifyBefore() {
-                super.notifyBefore();
-            }
-
-            @Override
-            protected void notifyAfter() {
-                super.notifyAfter();
-            }
         };
         TriggerTable.registerBefore(tid1_sub1, action);
         TriggerTable.registerBefore(tid2_sub1, action);

@@ -18,13 +18,14 @@ public class UseProcess extends Action {
     private LogicCard logicCard;
 
     public UseProcess(Role subject, List<Role> targets, LogicCard logicCard) {
-        super("USE" + logicCard.getId(), subject);
+        super(subject);
         this.targets = targets;
         this.logicCard = logicCard;
     }
 
     @Override
     protected void mainLogic(Action from) {
+        TriggerTable.processBefore(this, TriggerIdentifier.build("USE_" + logicCard.getId() + "_" + subject.code));
         TriggerTable.processBefore(this, TriggerIdentifier.build("TARGET_" + logicCard.getId() + "_" + subject.code));
         for(Role target : targets) {
             TriggerTable.processBefore(this, TriggerIdentifier.build("SPEC_" + logicCard.getId() + "_" + target.code));
@@ -35,7 +36,7 @@ public class UseProcess extends Action {
             TriggerTable.processAfter(this, TriggerIdentifier.build("SPEC_" + logicCard.getId() + "_" + target.code));
         }
         TriggerTable.processBefore(this, TriggerIdentifier.build("WORK_" + logicCard.getId() + "_" + subject.code));
-        this.logicCard.process(this.subject, this.targets);
+        this.logicCard.process(this, this.subject, this.targets);
         TriggerTable.processAfter(this, TriggerIdentifier.build("WORK_" + logicCard.getId() + "_" + subject.code));
     }
 }
