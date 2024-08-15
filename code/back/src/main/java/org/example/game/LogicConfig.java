@@ -5,6 +5,7 @@ import org.example.game.filter.DefaultFilter;
 import org.example.game.filter.FilterTable;
 import org.example.game.filter.TargetFilter;
 import org.example.game.filter.subfilter.AliveFilter;
+import org.example.game.filter.subfilter.DistanceWithinAttackRangeFilter;
 import org.example.game.filter.subfilter.NotSelfFilter;
 import org.example.game.role.Role;
 
@@ -30,7 +31,8 @@ public class LogicConfig {
         CompositeFilter SB01_filter = new CompositeFilter(
                 new ArrayList<>(Arrays.asList(
                         new AliveFilter(),
-                        new NotSelfFilter()
+                        new NotSelfFilter(),
+                        new DistanceWithinAttackRangeFilter()
                 ))
         );
         FilterTable.setFilter("SB01", SB01_filter);

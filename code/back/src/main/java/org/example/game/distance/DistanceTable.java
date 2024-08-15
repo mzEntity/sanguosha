@@ -22,7 +22,10 @@ public class DistanceTable {
             HashMap<Role, Integer> subjectDistance = new HashMap<>();
             for(int j = 0; j < aliveCount; j++) {
                 Role target = roles.get(j);
-                subjectDistance.put(target, (i - j + aliveCount) % aliveCount);
+                int distanceLeft = (i - j + aliveCount) % aliveCount;
+                int distanceRight = (j - i + aliveCount) % aliveCount;
+                int distance = Math.min(distanceLeft, distanceRight);
+                subjectDistance.put(target, distance);
             }
             distanceTable.put(subject, subjectDistance);
         }
