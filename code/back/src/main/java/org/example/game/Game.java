@@ -59,6 +59,17 @@ public class Game extends Action {
         return game.roles;
     }
 
+    public static List<Role> getAliveRoles(){
+        List<Role> aliveRoles = new ArrayList<>();
+        for(Role role: game.roles){
+            if(role.isAlive()){
+                aliveRoles.add(role);
+            }
+        }
+        return aliveRoles;
+    }
+
+
     public boolean noMoreThanOneLeft(){
         int liveCount = 0;
         for(Role r: this.roles){

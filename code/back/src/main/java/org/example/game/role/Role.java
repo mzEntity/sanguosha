@@ -16,6 +16,10 @@ public class Role {
 
     private Hero hero;
 
+    private Role left;
+    private Role right;
+
+
     public Role(int id) {
         this.id = id;
         this.playerArea = null;
