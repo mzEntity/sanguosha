@@ -4,6 +4,7 @@ import org.example.game.logic.Action;
 import org.example.game.logic.trigger.TriggerBuilder;
 import org.example.game.logic.trigger.TriggerManager;
 import org.example.game.role.Role;
+import org.example.log.Logger;
 
 /**
  * @Description:
@@ -22,6 +23,7 @@ public class InjurySettleAction extends Action {
 
     @Override
     protected void mainLogic(Action from) {
+        Logger.printf("%s对%s造成一点伤害\n", this.by.code, this.to.code);
         this.to.loseHp(1);
         boolean isDying = this.to.isDying();
         if(isDying){

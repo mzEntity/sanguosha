@@ -1,4 +1,4 @@
-package org.example.game.logic.stage;
+package org.example.game.logic.action.stage;
 
 import org.example.game.role.Role;
 import org.example.game.logic.Action;

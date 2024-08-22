@@ -27,7 +27,7 @@ public class DrawCardAction extends Action {
         SelectFromDrawAreaAction sa = new SelectFromDrawAreaAction(this.drawCount);
         sa.process(this);
         Deck selected = sa.getSelectResult();
-        Logger.printf("从摸牌堆摸牌：%s\n", selected);
+        Logger.printf("%s从摸牌堆摸牌：%s\n", this.subject.code, selected);
         selected.moveAllToBack(handDeck);
     }
 }

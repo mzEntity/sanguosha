@@ -1,6 +1,6 @@
 package org.example.game.logic;
 
-import org.example.game.logic.stage.*;
+import org.example.game.logic.action.stage.*;
 import org.example.game.role.Role;
 
 

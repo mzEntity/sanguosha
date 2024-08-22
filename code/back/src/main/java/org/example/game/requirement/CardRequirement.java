@@ -9,10 +9,8 @@ import org.example.game.board.card.logic.LogicCard;
  * @Date: 2024/8/13
  */
 public abstract class CardRequirement {
-    public String description;
 
-    public CardRequirement(String description) {
-        this.description = description;
+    public CardRequirement() {
     }
 
     public abstract boolean isMet(LogicCard lc);

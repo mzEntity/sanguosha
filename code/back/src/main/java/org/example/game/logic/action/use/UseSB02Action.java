@@ -5,9 +5,8 @@ import org.example.game.logic.Action;
 import org.example.game.logic.action.card.MoveToDiscardAreaAction;
 import org.example.game.logic.action.require.RequireUseSB02Action;
 import org.example.game.logic.action.role.InjurySettleAction;
-import org.example.game.logic.trigger.TriggerIdentifier;
-import org.example.game.logic.trigger.TriggerTable;
 import org.example.game.role.Role;
+import org.example.log.Logger;
 
 import java.util.List;
 
@@ -16,27 +15,21 @@ import java.util.List;
  * @Author: mzvltr
  * @Date: 2024/8/22
  */
-public class UseSB01Action extends Action {
+public class UseSB02Action extends Action{
     private Role subject;
-    private List<Role> targets;
+    private LogicCard targetSB01;
     private LogicCard logicCard;
 
-    public UseSB01Action(Role subject, List<Role> targets, LogicCard logicCard) {
+    public UseSB02Action(Role subject, LogicCard targetSB01, LogicCard logicCard) {
         super();
         this.subject = subject;
-        this.targets = targets;
+        this.targetSB01 = targetSB01;
         this.logicCard = logicCard;
     }
 
     @Override
     protected void mainLogic(Action from) {
-        for(Role target : targets) {
-            RequireUseSB02Action r = new RequireUseSB02Action(target);
-            r.process(this);
-            if(r.getResult() != null){
-                new UseSB02Action(target, this.logicCard, r.getResult()).process(this);
-            }
-            new InjurySettleAction(this.subject, target).process(this);
-        }
+        Logger.printf("%s使用一张[闪]\n", this.subject.code);
+        new MoveToDiscardAreaAction(this.logicCard.getPhysicalCard()).process(this);
     }
 }

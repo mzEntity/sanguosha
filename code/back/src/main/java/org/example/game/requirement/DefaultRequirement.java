@@ -10,7 +10,7 @@ import java.util.List;
 public class DefaultRequirement extends CardRequirement {
 
     public DefaultRequirement() {
-        super("default");
+        super();
     }
 
     @Override

@@ -14,8 +14,8 @@ import java.util.List;
 public class CompositeRequirement extends CardRequirement {
     private List<CardRequirement> requirements;
 
-    public CompositeRequirement(List<CardRequirement> requirements, String description) {
-        super(description);
+    public CompositeRequirement(List<CardRequirement> requirements) {
+        super();
         this.requirements = requirements;
     }
 

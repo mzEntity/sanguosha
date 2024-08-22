@@ -22,6 +22,7 @@ public class DyingAction extends Action {
 
     @Override
     protected void mainLogic(Action from) {
+        Logger.printf("%s进入濒死\n", this.subject.code);
         boolean isDead = this.subject.isDying();
         if(isDead){
             Logger.printf("玩家%s死亡\n", this.subject.code);
