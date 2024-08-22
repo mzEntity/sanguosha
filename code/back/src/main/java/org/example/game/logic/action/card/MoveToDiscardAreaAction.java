@@ -1,9 +1,8 @@
-package org.example.game.action.trigger;
+package org.example.game.logic.action.card;
 
 import org.example.game.Game;
-import org.example.game.action.Action;
+import org.example.game.logic.Action;
 import org.example.game.board.card.Deck;
-import org.example.game.role.Role;
 import org.example.log.Logger;
 
 /**
@@ -14,8 +13,8 @@ import org.example.log.Logger;
 public class MoveToDiscardAreaAction extends Action {
     private Deck targetDeck;
 
-    public MoveToDiscardAreaAction(Role subject, Deck deck) {
-        super(subject);
+    public MoveToDiscardAreaAction(Deck deck) {
+        super();
         this.targetDeck = deck;
     }
 

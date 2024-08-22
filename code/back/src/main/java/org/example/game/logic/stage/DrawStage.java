@@ -1,14 +1,16 @@
-package org.example.game.action.stage;
+package org.example.game.logic.stage;
 
-import org.example.game.action.trigger.DrawCardAction;
+import org.example.game.logic.action.card.DrawCardAction;
 import org.example.game.role.Role;
-import org.example.game.action.Action;
+import org.example.game.logic.Action;
 import org.example.log.Logger;
 
 public class DrawStage extends Action {
+    private Role subject;
     private static final int DEFAULT_DRAW_NUM = 2;
     public DrawStage(Role subject) {
-        super(subject);
+        super();
+        this.subject = subject;
     }
 
     @Override

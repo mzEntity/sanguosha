@@ -1,12 +1,14 @@
-package org.example.game.action.stage;
+package org.example.game.logic.stage;
 
 import org.example.game.role.Role;
-import org.example.game.action.Action;
+import org.example.game.logic.Action;
 import org.example.log.Logger;
 
 public class DivinationStage extends Action {
+    private Role subject;
     public DivinationStage(Role subject) {
-        super(subject);
+        super();
+        this.subject = subject;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package org.example.game.action;
+package org.example.game.logic.trigger;
 
 import java.util.Objects;
 
@@ -12,35 +12,20 @@ public class TriggerIdentifier {
     private final String id;
     private TriggerIdentifier next;
 
-    public static TriggerIdentifier build(final String id) {
-        String[] parts = id.split("_");
-        TriggerIdentifier result = new TriggerIdentifier(parts[0]);
-        TriggerIdentifier temp = result;
-        for (int i = 1; i < parts.length; i++) {
-            temp.setNext(new TriggerIdentifier(parts[i]));
-            temp = temp.getNext();
-        }
-        return result;
-    }
-
-    private TriggerIdentifier(String id) {
+    TriggerIdentifier(String id) {
         this.id = id;
         this.next = null;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public TriggerIdentifier getNext() {
+    TriggerIdentifier getNext() {
         return next;
     }
 
-    public boolean hasNext() {
+    boolean hasNext() {
         return next != null;
     }
 
-    private void setNext(TriggerIdentifier next) {
+    void setNext(TriggerIdentifier next) {
         this.next = next;
     }
 

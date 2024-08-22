@@ -11,6 +11,10 @@ public class Card {
         this.id = id;
     }
 
+    public Card getClone(){
+        return new Card(suit, point, id);
+    }
+
     @Override
     public String toString() {
         String name = CardDict.getCardName(this.id);

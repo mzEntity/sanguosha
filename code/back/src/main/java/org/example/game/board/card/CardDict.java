@@ -23,5 +23,4 @@ public class CardDict {
         }
         return cardDict.get(cardId);
     }
-
 }

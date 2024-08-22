@@ -1,8 +1,7 @@
 package org.example.game;
 
-import org.example.game.action.Turn;
-import org.example.game.board.card.CardDict;
-import org.example.game.action.Action;
+import org.example.game.logic.Turn;
+import org.example.game.logic.Action;
 import org.example.game.board.Board;
 import org.example.game.board.card.Card;
 import org.example.game.board.card.Deck;
@@ -24,7 +23,7 @@ public class Game extends Action {
     public Board board;
 
     private Game() {
-        super(null);
+        super();
         this.activeRole = null;
     }
 

@@ -1,6 +1,6 @@
-package org.example.game.action.trigger;
+package org.example.game.logic.action.card;
 
-import org.example.game.action.Action;
+import org.example.game.logic.Action;
 import org.example.game.board.card.Deck;
 import org.example.game.role.Role;
 
@@ -10,15 +10,17 @@ import org.example.game.role.Role;
  * @Date: 2024/8/13
  */
 public class DiscardAction extends Action {
+    private Role subject;
     private Deck discard;
 
     public DiscardAction(Role subject, Deck discard) {
-        super(subject);
+        super();
+        this.subject = subject;
         this.discard = discard;
     }
 
     @Override
     protected void mainLogic(Action from) {
-        new MoveToDiscardAreaAction(this.subject, this.discard).process(this);
+        new MoveToDiscardAreaAction(this.discard).process(this);
     }
 }

@@ -1,7 +1,6 @@
-package org.example.game.action.trigger;
+package org.example.game.logic.action.global;
 
-import org.example.game.action.Action;
-import org.example.game.role.Role;
+import org.example.game.logic.Action;
 import org.example.log.Logger;
 
 /**
@@ -14,7 +13,7 @@ public class GameOverAction extends Action {
     private String msg;
 
     public GameOverAction(String msg) {
-        super(null);
+        super();
         this.msg = msg;
     }
 

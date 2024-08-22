@@ -1,11 +1,11 @@
-package org.example.game.action;
+package org.example.game.logic;
 
-import org.example.game.Game;
-import org.example.game.action.stage.*;
+import org.example.game.logic.stage.*;
 import org.example.game.role.Role;
 
 
 public class Turn extends Action {
+    private Role subject;
     private final TurnStartStage turnStartStage;
     private final PreparationStage preparationStage;
     private final DivinationStage divinationStage;
@@ -17,7 +17,8 @@ public class Turn extends Action {
     public int handLimit;
 
     public Turn(Role subject) {
-        super(subject);
+        super();
+        this.subject = subject;
         this.turnStartStage = new TurnStartStage(subject);
         this.preparationStage = new PreparationStage(subject);
         this.divinationStage = new DivinationStage(subject);

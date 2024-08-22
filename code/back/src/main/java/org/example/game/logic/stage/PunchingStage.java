@@ -1,22 +1,23 @@
-package org.example.game.action.stage;
+package org.example.game.logic.stage;
 
 
-import org.example.game.action.process.UseProcess;
 import org.example.game.board.card.Card;
 import org.example.game.board.card.Deck;
-import org.example.game.board.card.logic.SB01;
+import org.example.game.board.card.logic.LogicCard;
 import org.example.game.filter.FilterTable;
+import org.example.game.logic.action.use.UseSB01Action;
 import org.example.game.role.Role;
-import org.example.game.action.Action;
+import org.example.game.logic.Action;
 import org.example.log.Logger;
-import org.example.tools.FileOperator;
 
 import java.util.List;
 
 
 public class PunchingStage extends Action {
+    private Role subject;
     public PunchingStage(Role subject) {
-        super(subject);
+        super();
+        this.subject = subject;
     }
 
     @Override
@@ -43,10 +44,10 @@ public class PunchingStage extends Action {
                Logger.printf("[杀]: 没有可用的目标\n");
                return;
             }
-            Card card = cardDeck.getCard(0);
             List<Role> targets = allTargets.subList(0, 1);
             Logger.printf("[杀]: %s对%s出杀\n", this.subject.code, targets.get(0).code);
-            new UseProcess(this.subject, targets, new SB01(cardDeck)).process(this);
+
+            new UseSB01Action(this.subject, targets, new LogicCard(cardDeck, cardDeck.transform("SB01"))).process(this);
         }
     }
 //

@@ -1,9 +1,8 @@
-package org.example.game.action.trigger;
+package org.example.game.logic.action.global;
 
 import org.example.game.Game;
-import org.example.game.action.Action;
+import org.example.game.logic.Action;
 import org.example.game.board.card.Deck;
-import org.example.game.role.Role;
 import org.example.log.Logger;
 
 /**
@@ -13,7 +12,7 @@ import org.example.log.Logger;
  */
 public class ReshuffleAction extends Action {
     public ReshuffleAction() {
-        super(null);
+        super();
     }
 
     @Override

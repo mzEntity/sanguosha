@@ -1,19 +1,19 @@
-package org.example.game.action.stage;
+package org.example.game.logic.stage;
 
-import org.example.game.action.TriggerIdentifier;
-import org.example.game.action.TriggerTable;
-import org.example.game.action.Turn;
-import org.example.game.action.trigger.DiscardAction;
+import org.example.game.logic.Turn;
+import org.example.game.logic.action.card.DiscardAction;
 import org.example.game.board.card.Deck;
 import org.example.game.role.Role;
-import org.example.game.action.Action;
+import org.example.game.logic.Action;
 import org.example.log.Logger;
 
 public class DiscardingStage extends Action {
+    private Role subject;
     private final Turn turn;
 
     public DiscardingStage(Role subject, Turn turn) {
-        super(subject);
+        super();
+        this.subject = subject;
         this.turn = turn;
     }
 

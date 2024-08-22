@@ -1,9 +1,8 @@
-package org.example.game.action.trigger;
+package org.example.game.logic.action.global;
 
 import org.example.game.Game;
-import org.example.game.action.Action;
+import org.example.game.logic.Action;
 import org.example.game.board.card.Deck;
-import org.example.game.role.Role;
 
 /**
  * @Description:
@@ -14,8 +13,8 @@ public class SelectFromDrawAreaAction extends Action {
     private int selectCount;
     private Deck selectResult;
 
-    public SelectFromDrawAreaAction(Role subject, int selectCount) {
-        super(subject);
+    public SelectFromDrawAreaAction(int selectCount) {
+        super();
         this.selectCount = selectCount;
         this.selectResult = new Deck();
     }
@@ -27,7 +26,7 @@ public class SelectFromDrawAreaAction extends Action {
             new ReshuffleAction().process(this);
         }
         if(drawDeck.size() < selectCount) {
-            new GameOverAction("牌堆不足，游戏结束");
+            new GameOverAction("牌堆不足，游戏结束").process(this);
         }
         this.selectResult = drawDeck.selectSomeAsDeck(0, this.selectCount);
     }
