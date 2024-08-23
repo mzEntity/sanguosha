@@ -4,8 +4,7 @@ import org.example.game.board.card.deck.LogicCard;
 import org.example.game.logic.Action;
 import org.example.game.logic.action.card.MoveToDiscardAreaAction;
 import org.example.game.logic.action.role.GetCardFromPlayerAreaAction;
-import org.example.game.logic.action.role.InjurySettleAction;
-import org.example.game.logic.action.use.AskAndUseSUS09Process;
+import org.example.game.logic.action.use.PollAndUseSUS09Process;
 import org.example.game.role.Role;
 import org.example.log.Logger;
 
@@ -33,7 +32,7 @@ public class UseSUS04Action extends Action {
         new MoveToDiscardAreaAction(this.logicCard.getPhysicalCard()).process(this);
         for(Role target : targets) {
             Logger.printf("[顺手牵羊]: %s指定%s为目标\n", this.subject.code, target.code);
-            AskAndUseSUS09Process a = new AskAndUseSUS09Process(this, this.logicCard);
+            PollAndUseSUS09Process a = new PollAndUseSUS09Process(this, this.logicCard);
             a.process();
             if(a.getResult() != null){
                 continue;

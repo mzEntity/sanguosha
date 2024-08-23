@@ -4,8 +4,7 @@ import org.example.game.board.card.deck.LogicCard;
 import org.example.game.logic.Action;
 import org.example.game.logic.action.card.MoveToDiscardAreaAction;
 import org.example.game.logic.action.role.GainHealthAction;
-import org.example.game.logic.action.role.InjurySettleAction;
-import org.example.game.logic.action.use.AskAndUseSUS09Process;
+import org.example.game.logic.action.use.PollAndUseSUS09Process;
 import org.example.game.role.Role;
 import org.example.log.Logger;
 
@@ -36,7 +35,7 @@ public class UseSUS01Action extends Action {
             if(target.isFullBlood()){
                 continue;
             }
-            AskAndUseSUS09Process a = new AskAndUseSUS09Process(this, this.logicCard);
+            PollAndUseSUS09Process a = new PollAndUseSUS09Process(this, this.logicCard);
             a.process();
             if(a.getResult() != null){
                 continue;

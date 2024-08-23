@@ -31,6 +31,7 @@ public class PunchingStage extends Action {
     @Override
     protected void mainLogic(Action from) {
         Logger.printf("PunchingStage:出牌阶段\n");
+        tryToSUS05();
         tryToSUS06();
         tryToSUS04();
         tryToCarryWeapon();
@@ -115,6 +116,15 @@ public class PunchingStage extends Action {
         }
     }
 
+    private void tryToSUS05(){
+        Deck handDeck = this.subject.getHandDeck();
+        Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SUS05"));
+        if(cardDeck != null){
+            List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SUS05");
+            new UseSUS05Action(this.subject, allTargets, new LogicCard(cardDeck, cardDeck.transform("SUS05"))).process(this);
+        }
+    }
+
     private void tryToSUS06(){
         Deck handDeck = this.subject.getHandDeck();
         Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SUS06"));
@@ -128,6 +138,8 @@ public class PunchingStage extends Action {
             new UseSUS06Action(this.subject, targets, new LogicCard(cardDeck, cardDeck.transform("SUS06"))).process(this);
         }
     }
+
+
 
     private void tryToSUS08(){
         Deck handDeck = this.subject.getHandDeck();

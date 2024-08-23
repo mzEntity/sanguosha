@@ -7,11 +7,11 @@ import org.example.game.board.card.deck.Deck;
  * @Author: mzvltr
  * @Date: 2024/8/22
  */
-public class RequireProcess {
+public class AskToMeetRequirementProcess {
     private CardRequirement cardRequirement;
     private Deck result;
 
-    public RequireProcess(CardRequirement cardRequirement) {
+    public AskToMeetRequirementProcess(CardRequirement cardRequirement) {
         this.cardRequirement = cardRequirement;
         this.result = null;
     }

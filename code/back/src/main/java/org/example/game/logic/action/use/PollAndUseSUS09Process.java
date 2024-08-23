@@ -14,14 +14,14 @@ import java.util.List;
  * @Author: mzvltr
  * @Date: 2024/8/23
  */
-public class AskAndUseSUS09Process {
+public class PollAndUseSUS09Process {
     private Action from;
     private LogicCard target;
 
     private Role subject;
     private LogicCard result;
 
-    public AskAndUseSUS09Process(Action from, LogicCard target) {
+    public PollAndUseSUS09Process(Action from, LogicCard target) {
         this.from = from;
         this.target = target;
         this.subject = null;

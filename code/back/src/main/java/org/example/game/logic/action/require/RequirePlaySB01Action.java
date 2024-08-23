@@ -4,7 +4,7 @@ import org.example.Main;
 import org.example.game.board.card.deck.Deck;
 import org.example.game.board.card.deck.LogicCard;
 import org.example.game.logic.Action;
-import org.example.game.requirement.RequireProcess;
+import org.example.game.requirement.AskToMeetRequirementProcess;
 import org.example.game.requirement.subrequirement.IsSpecificCardRequirement;
 import org.example.game.role.Role;
 
@@ -32,7 +32,7 @@ public class RequirePlaySB01Action extends Action {
                 this.result = new LogicCard(sb02, sb02.transform("SB01"));
             }
         } else {
-            RequireProcess rp = new RequireProcess(new IsSpecificCardRequirement("SB01"));
+            AskToMeetRequirementProcess rp = new AskToMeetRequirementProcess(new IsSpecificCardRequirement("SB01"));
             rp.decide();
             Deck d = rp.getResult();
             if(d != null){
