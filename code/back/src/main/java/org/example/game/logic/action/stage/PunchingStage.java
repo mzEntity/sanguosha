@@ -10,7 +10,9 @@ import org.example.game.logic.action.use.UseMountAction;
 import org.example.game.logic.action.use.UseSB01Action;
 import org.example.game.logic.action.use.UseWeaponAction;
 import org.example.game.logic.action.use.undelayed.UseSUS01Action;
+import org.example.game.logic.action.use.undelayed.UseSUS02Action;
 import org.example.game.logic.action.use.undelayed.UseSUS03Action;
+import org.example.game.logic.action.use.undelayed.UseSUS08Action;
 import org.example.game.requirement.subrequirement.IsArmorCardRequirement;
 import org.example.game.requirement.subrequirement.IsMountCardRequirement;
 import org.example.game.requirement.subrequirement.IsSpecificCardRequirement;
@@ -35,7 +37,10 @@ public class PunchingStage extends Action {
         tryToCarryWeapon();
         tryToWearArmor();
         tryToMount();
+        tryToSUS01();
+        tryToSUS02();
         tryToSUS03();
+        tryToSUS08();
         tryToSB01();
 //        tryToSUS06(handDeck);
 //        tryToSUS05(handDeck);
@@ -74,6 +79,15 @@ public class PunchingStage extends Action {
         }
     }
 
+    private void tryToSUS02(){
+        Deck handDeck = this.subject.getHandDeck();
+        Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SUS02"));
+        if(cardDeck != null){
+            List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SUS02");
+            new UseSUS02Action(this.subject, allTargets, new LogicCard(cardDeck, cardDeck.transform("SUS02"))).process(this);
+        }
+    }
+
     private void tryToSUS03(){
         Deck handDeck = this.subject.getHandDeck();
         Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SUS03"));
@@ -85,6 +99,15 @@ public class PunchingStage extends Action {
             }
             List<Role> targets = allTargets.subList(0, 1);
             new UseSUS03Action(this.subject, targets, new LogicCard(cardDeck, cardDeck.transform("SUS03"))).process(this);
+        }
+    }
+
+    private void tryToSUS08(){
+        Deck handDeck = this.subject.getHandDeck();
+        Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SUS08"));
+        if(cardDeck != null){
+            List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SUS08");
+            new UseSUS08Action(this.subject, allTargets, new LogicCard(cardDeck, cardDeck.transform("SUS08"))).process(this);
         }
     }
 

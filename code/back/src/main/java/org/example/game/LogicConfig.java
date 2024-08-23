@@ -36,7 +36,12 @@ public class LogicConfig {
                         new NotSelfFilter()
                 ))
         ));
-        FilterTable.setFilter("SUS03", new AliveFilter());
+        FilterTable.setFilter("SUS03", new CompositeAndFilter(
+                new ArrayList<>(Arrays.asList(
+                        new AliveFilter(),
+                        new NotSelfFilter()
+                ))
+        ));
         FilterTable.setFilter("SUS04", new CompositeAndFilter(
                 new ArrayList<>(Arrays.asList(
                         new AliveFilter(),
