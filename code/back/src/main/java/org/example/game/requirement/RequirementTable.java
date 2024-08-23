@@ -1,12 +1,8 @@
 package org.example.game.requirement;
 
-import org.example.game.Game;
-import org.example.game.board.card.Deck;
-import org.example.game.board.card.logic.LogicCard;
-import org.example.game.role.Role;
+import org.example.game.board.card.LogicCard;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class RequirementTable {
     private static final HashMap<String, CardRequirement> requirementTable = new HashMap<>();

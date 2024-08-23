@@ -3,21 +3,17 @@ package org.example.game.board.card;
 public class Card {
     public Suit suit;
     public int point;
-    public String id;
+    public CardIdentifier cid;
 
-    public Card(Suit suit, int point, String id) {
+    public Card(Suit suit, int point, CardIdentifier cid) {
         this.suit = suit;
         this.point = point;
-        this.id = id;
+        this.cid = cid;
     }
 
-    public Card getClone(){
-        return new Card(suit, point, id);
-    }
 
     @Override
     public String toString() {
-        String name = CardDict.getCardName(this.id);
-        return "Card(" + suit + ", " + point +  ", " + name + ")";
+        return "Card(" + suit + ", " + point +  ", " + this.cid.name() + ")";
     }
 }

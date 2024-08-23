@@ -1,12 +1,9 @@
 package org.example.game.logic.action.use;
 
-import org.example.game.board.card.logic.LogicCard;
+import org.example.game.board.card.LogicCard;
 import org.example.game.logic.Action;
-import org.example.game.logic.action.card.MoveToDiscardAreaAction;
 import org.example.game.logic.action.require.RequireUseSB02Action;
 import org.example.game.logic.action.role.InjurySettleAction;
-import org.example.game.logic.trigger.TriggerIdentifier;
-import org.example.game.logic.trigger.TriggerTable;
 import org.example.game.role.Role;
 
 import java.util.List;

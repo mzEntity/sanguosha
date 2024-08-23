@@ -2,7 +2,7 @@ package org.example.game.logic.action.require;
 
 import org.example.Main;
 import org.example.game.board.card.Deck;
-import org.example.game.board.card.logic.LogicCard;
+import org.example.game.board.card.LogicCard;
 import org.example.game.logic.Action;
 import org.example.game.requirement.RequireProcess;
 import org.example.game.requirement.subrequirement.IsSpecificCardRequirement;

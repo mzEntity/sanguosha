@@ -16,7 +16,6 @@ public class CardDict {
         }
     }
 
-
     public static String getCardName(String cardId){
         if(!cardDict.containsKey(cardId)){
             return null;

@@ -1,9 +1,8 @@
 package org.example.game.logic.action.stage;
 
 
-import org.example.game.board.card.Card;
 import org.example.game.board.card.Deck;
-import org.example.game.board.card.logic.LogicCard;
+import org.example.game.board.card.LogicCard;
 import org.example.game.filter.FilterTable;
 import org.example.game.logic.action.use.UseSB01Action;
 import org.example.game.role.Role;

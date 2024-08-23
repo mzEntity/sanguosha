@@ -142,7 +142,7 @@ public class Deck {
         if(this.size() == 1){
             point = this.cards.get(0).point;
         }
-        return new Card(suit, point, id);
+        return CardBuilder.buildCard(suit, point, id);
     }
 
     @Override
@@ -162,7 +162,7 @@ public class Deck {
     // 仅测试用
     public Deck containCard(String code){
         for(Card c: this.cards){
-            if(c.id.equals(code)){
+            if(c.cid.getId().equals(code)){
                 return this.splitSubDeck(this.subDeck(c));
             }
         }

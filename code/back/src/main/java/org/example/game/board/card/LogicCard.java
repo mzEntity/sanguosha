@@ -1,11 +1,4 @@
-package org.example.game.board.card.logic;
-
-import org.example.game.logic.Action;
-import org.example.game.board.card.Card;
-import org.example.game.board.card.Deck;
-import org.example.game.role.Role;
-
-import java.util.List;
+package org.example.game.board.card;
 
 public class LogicCard {
     private Deck physicalCard;
@@ -30,6 +23,6 @@ public class LogicCard {
     }
 
     public String getId(){
-        return this.logicCard.id;
+        return this.logicCard.cid.getId();
     }
 }

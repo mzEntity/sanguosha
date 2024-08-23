@@ -1,7 +1,7 @@
 package org.example.game.requirement.subrequirement;
 
 
-import org.example.game.board.card.logic.LogicCard;
+import org.example.game.board.card.LogicCard;
 import org.example.game.requirement.CardRequirement;
 
 /**
@@ -19,6 +19,6 @@ public class IsSpecificCardRequirement extends CardRequirement {
 
     @Override
     public boolean isMet(LogicCard lc) {
-        return this.cardId.equals(lc.getLogicCard().id);
+        return this.cardId.equals(lc.getLogicCard().cid.getId());
     }
 }
