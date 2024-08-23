@@ -5,8 +5,12 @@ import org.example.game.board.card.Card;
 import org.example.game.board.card.deck.Deck;
 import org.example.game.board.card.deck.LogicCard;
 import org.example.game.filter.FilterTable;
+import org.example.game.logic.action.use.UseArmorAction;
+import org.example.game.logic.action.use.UseMountAction;
 import org.example.game.logic.action.use.UseSB01Action;
 import org.example.game.logic.action.use.UseWeaponAction;
+import org.example.game.requirement.subrequirement.IsArmorCardRequirement;
+import org.example.game.requirement.subrequirement.IsMountCardRequirement;
 import org.example.game.requirement.subrequirement.IsSpecificCardRequirement;
 import org.example.game.requirement.subrequirement.IsWeaponCardRequirement;
 import org.example.game.role.Role;
@@ -27,6 +31,8 @@ public class PunchingStage extends Action {
     protected void mainLogic(Action from) {
         Logger.printf("PunchingStage:出牌阶段\n");
         tryToCarryWeapon();
+        tryToWearArmor();
+        tryToMount();
         tryToSB01();
 //        tryToSUS06(handDeck);
 //        tryToSUS05(handDeck);
@@ -60,10 +66,29 @@ public class PunchingStage extends Action {
         Deck handDeck = this.subject.getHandDeck();
         Deck cardDeck = handDeck.getCardDeckIfContain(new IsWeaponCardRequirement());
         if(cardDeck != null){
-            Logger.printf("%s装备了%s\n", this.subject.code, cardDeck);
+            Logger.printf("%s装备了武器%s\n", this.subject.code, cardDeck);
             new UseWeaponAction(this.subject, cardDeck).process(this);
         }
     }
+
+    private void tryToWearArmor(){
+        Deck handDeck = this.subject.getHandDeck();
+        Deck cardDeck = handDeck.getCardDeckIfContain(new IsArmorCardRequirement());
+        if(cardDeck != null){
+            Logger.printf("%s装备了防具%s\n", this.subject.code, cardDeck);
+            new UseArmorAction(this.subject, cardDeck).process(this);
+        }
+    }
+
+    private void tryToMount(){
+        Deck handDeck = this.subject.getHandDeck();
+        Deck cardDeck = handDeck.getCardDeckIfContain(new IsMountCardRequirement());
+        if(cardDeck != null){
+            Logger.printf("%s装备了坐骑%s\n", this.subject.code, cardDeck);
+            new UseMountAction(this.subject, cardDeck).process(this);
+        }
+    }
+
 //
 //    private void tryToSB03(Deck handDeck){
 //        Deck cardDeck = handDeck.containCard("SB03");

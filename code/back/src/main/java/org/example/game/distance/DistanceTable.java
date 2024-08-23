@@ -19,12 +19,17 @@ public class DistanceTable {
         HashMap<Role, HashMap<Role, Integer>> distanceTable = new HashMap<>();
         for (int i = 0; i < aliveCount; i++) {
             Role subject = roles.get(i);
+            boolean hasMarch = !subject.getPlayerArea().getMarchMountArea().isEmpty();
             HashMap<Role, Integer> subjectDistance = new HashMap<>();
             for(int j = 0; j < aliveCount; j++) {
                 Role target = roles.get(j);
+                boolean hasRetreat = !target.getPlayerArea().getRetreatMountArea().isEmpty();
                 int distanceLeft = (i - j + aliveCount) % aliveCount;
                 int distanceRight = (j - i + aliveCount) % aliveCount;
                 int distance = Math.min(distanceLeft, distanceRight);
+                if(hasMarch) distance -= 1;
+                if(hasRetreat) distance += 1;
+                if(distance < 0) distance = 0;
                 subjectDistance.put(target, distance);
             }
             distanceTable.put(subject, subjectDistance);
