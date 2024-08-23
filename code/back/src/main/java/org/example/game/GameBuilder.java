@@ -12,7 +12,7 @@ import java.util.*;
 public class GameBuilder {
     public Game buildGame(int playerCount){
         Board board = new BoardBuilder().buildBoard(playerCount);
-        List<Card> cardList = new CardBuilder().buildDeck();
+        List<Card> cardList = CardBuilder.buildDeck();
         List<Role> roles = this.prepareRoles(playerCount, board);
 
         Game game = Game.getGame();

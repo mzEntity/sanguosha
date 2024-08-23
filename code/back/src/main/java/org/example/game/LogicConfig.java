@@ -36,6 +36,7 @@ public class LogicConfig {
                 ))
         );
         FilterTable.setFilter("SB01", SB01_filter);
+        FilterTable.setFilter("SUS03", new AliveFilter());
     }
 
     public void initCardRequirement(){

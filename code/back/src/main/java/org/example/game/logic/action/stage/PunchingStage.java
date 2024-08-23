@@ -9,6 +9,7 @@ import org.example.game.logic.action.use.UseArmorAction;
 import org.example.game.logic.action.use.UseMountAction;
 import org.example.game.logic.action.use.UseSB01Action;
 import org.example.game.logic.action.use.UseWeaponAction;
+import org.example.game.logic.action.use.undelayed.UseSUS03Action;
 import org.example.game.requirement.subrequirement.IsArmorCardRequirement;
 import org.example.game.requirement.subrequirement.IsMountCardRequirement;
 import org.example.game.requirement.subrequirement.IsSpecificCardRequirement;
@@ -33,6 +34,7 @@ public class PunchingStage extends Action {
         tryToCarryWeapon();
         tryToWearArmor();
         tryToMount();
+        tryToSUS03();
         tryToSB01();
 //        tryToSUS06(handDeck);
 //        tryToSUS05(handDeck);
@@ -59,6 +61,21 @@ public class PunchingStage extends Action {
             Logger.printf("[杀]: %s对%s出杀\n", this.subject.code, targets.get(0).code);
 
             new UseSB01Action(this.subject, targets, new LogicCard(cardDeck, cardDeck.transform("SB01"))).process(this);
+        }
+    }
+
+    private void tryToSUS03(){
+        Deck handDeck = this.subject.getHandDeck();
+        Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SUS03"));
+        if(cardDeck != null){
+            List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SUS03");
+            if(allTargets.isEmpty()){
+                Logger.printf("[决斗]: 没有可用的目标\n");
+                return;
+            }
+            List<Role> targets = allTargets.subList(0, 1);
+            Logger.printf("[决斗]: %s对%s出决斗\n", this.subject.code, targets.get(0).code);
+            new UseSUS03Action(this.subject, targets, new LogicCard(cardDeck, cardDeck.transform("SUS03"))).process(this);
         }
     }
 
