@@ -31,6 +31,7 @@ public class PunchingStage extends Action {
     @Override
     protected void mainLogic(Action from) {
         Logger.printf("PunchingStage:出牌阶段\n");
+        tryToSUS06();
         tryToSUS04();
         tryToCarryWeapon();
         tryToWearArmor();
@@ -111,6 +112,20 @@ public class PunchingStage extends Action {
             }
             List<Role> targets = allTargets.subList(0, 1);
             new UseSUS04Action(this.subject, targets, new LogicCard(cardDeck, cardDeck.transform("SUS04"))).process(this);
+        }
+    }
+
+    private void tryToSUS06(){
+        Deck handDeck = this.subject.getHandDeck();
+        Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SUS06"));
+        if(cardDeck != null){
+            List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SUS06");
+            if(allTargets.isEmpty()){
+                Logger.printf("[过河拆桥]: 没有可用的目标\n");
+                return;
+            }
+            List<Role> targets = allTargets.subList(0, 1);
+            new UseSUS06Action(this.subject, targets, new LogicCard(cardDeck, cardDeck.transform("SUS06"))).process(this);
         }
     }
 
