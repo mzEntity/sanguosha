@@ -28,6 +28,6 @@ public class DrawCardAction extends Action {
         sa.process(this);
         Deck selected = sa.getSelectResult();
         Logger.printf("%s从摸牌堆摸牌：%s\n", this.subject.code, selected);
-        selected.moveAllToBack(handDeck);
+        new MoveToHandAreaAction(this.subject, selected).process(this);
     }
 }
