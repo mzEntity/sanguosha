@@ -1,6 +1,6 @@
 package org.example.game.board.area.player;
 
-import org.example.game.board.card.Deck;
+import org.example.game.board.card.deck.Deck;
 
 public class DivinationArea {
     public Deck tasks;

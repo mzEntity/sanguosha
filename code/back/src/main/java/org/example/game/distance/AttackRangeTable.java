@@ -1,5 +1,7 @@
 package org.example.game.distance;
 
+import org.example.game.board.card.deck.Deck;
+import org.example.game.board.card.concrete.equipment.WeaponCard;
 import org.example.game.role.Role;
 
 /**
@@ -9,6 +11,11 @@ import org.example.game.role.Role;
  */
 public class AttackRangeTable {
     public static int getAttackRange(Role r){
-        return 1;
+        Deck weaponDeck = r.getPlayerArea().getWeaponArea().getDeck();
+        if(weaponDeck.isEmpty()){
+            return 1;
+        }
+        WeaponCard weapon = (WeaponCard) weaponDeck.getCard(0);
+        return weapon.getAttackRange();
     }
 }

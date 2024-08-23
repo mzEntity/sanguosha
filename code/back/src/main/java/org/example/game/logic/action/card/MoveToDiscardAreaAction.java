@@ -2,7 +2,7 @@ package org.example.game.logic.action.card;
 
 import org.example.game.Game;
 import org.example.game.logic.Action;
-import org.example.game.board.card.Deck;
+import org.example.game.board.card.deck.Deck;
 import org.example.log.Logger;
 
 /**

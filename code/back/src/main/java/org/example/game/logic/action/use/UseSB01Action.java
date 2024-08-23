@@ -1,6 +1,6 @@
 package org.example.game.logic.action.use;
 
-import org.example.game.board.card.LogicCard;
+import org.example.game.board.card.deck.LogicCard;
 import org.example.game.logic.Action;
 import org.example.game.logic.action.require.RequireUseSB02Action;
 import org.example.game.logic.action.role.InjurySettleAction;

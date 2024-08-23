@@ -35,9 +35,9 @@ public class DyingAction extends Action {
     }
 
     private void clearArea(){
-        PlayerArea area = this.subject.playerArea;
-        new MoveToDiscardAreaAction(area.handArea.cards).process(this);
-        new MoveToDiscardAreaAction(area.equipmentArea.getAllEquipments()).process(this);
-        new MoveToDiscardAreaAction(area.divinationArea.tasks).process(this);
+        PlayerArea area = this.subject.getPlayerArea();
+        new MoveToDiscardAreaAction(area.getHandArea().cards).process(this);
+        new MoveToDiscardAreaAction(area.getEquipmentArea().getAllEquipments()).process(this);
+        new MoveToDiscardAreaAction(area.getDivinationArea().tasks).process(this);
     }
 }

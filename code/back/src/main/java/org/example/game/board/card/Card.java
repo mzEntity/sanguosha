@@ -14,6 +14,6 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card(" + suit + ", " + point +  ", " + this.cid.name() + ")";
+        return "Card(" + suit + ", " + point +  ", " + this.cid.getName() + ")";
     }
 }

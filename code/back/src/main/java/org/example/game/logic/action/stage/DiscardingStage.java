@@ -2,7 +2,7 @@ package org.example.game.logic.action.stage;
 
 import org.example.game.logic.Turn;
 import org.example.game.logic.action.card.DiscardAction;
-import org.example.game.board.card.Deck;
+import org.example.game.board.card.deck.Deck;
 import org.example.game.role.Role;
 import org.example.game.logic.Action;
 import org.example.log.Logger;
@@ -22,7 +22,7 @@ public class DiscardingStage extends Action {
         Logger.printf("DiscardingStage:弃牌阶段\n");
         int handLimit = this.turn.handLimit;
 
-        Deck handDeck = this.subject.playerArea.handArea.cards;
+        Deck handDeck = this.subject.getPlayerArea().getHandArea().cards;
         if(handDeck.size() > handLimit){
             int discardCount = handDeck.size() - handLimit;
             Logger.printf("手牌数(%d)超过手牌上限(%d),请弃牌%d张\n", handDeck.size(), handLimit, discardCount);

@@ -4,7 +4,7 @@ import org.example.game.logic.Turn;
 import org.example.game.logic.Action;
 import org.example.game.board.Board;
 import org.example.game.board.card.Card;
-import org.example.game.board.card.Deck;
+import org.example.game.board.card.deck.Deck;
 import org.example.game.role.Role;
 import org.example.game.role.hero.Hero;
 import org.example.log.Logger;

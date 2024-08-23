@@ -1,10 +1,14 @@
 package org.example.game.logic.action.stage;
 
 
-import org.example.game.board.card.Deck;
-import org.example.game.board.card.LogicCard;
+import org.example.game.board.card.Card;
+import org.example.game.board.card.deck.Deck;
+import org.example.game.board.card.deck.LogicCard;
 import org.example.game.filter.FilterTable;
 import org.example.game.logic.action.use.UseSB01Action;
+import org.example.game.logic.action.use.UseWeaponAction;
+import org.example.game.requirement.subrequirement.IsSpecificCardRequirement;
+import org.example.game.requirement.subrequirement.IsWeaponCardRequirement;
 import org.example.game.role.Role;
 import org.example.game.logic.Action;
 import org.example.log.Logger;
@@ -22,23 +26,25 @@ public class PunchingStage extends Action {
     @Override
     protected void mainLogic(Action from) {
         Logger.printf("PunchingStage:出牌阶段\n");
-        Deck handDeck = this.subject.getHandDeck();
+        tryToCarryWeapon();
+        tryToSB01();
 //        tryToSUS06(handDeck);
 //        tryToSUS05(handDeck);
 //        tryToSUS04(handDeck);
 //        tryToSUS03(handDeck);
 //        tryToSUS07(handDeck);
-        tryToSB01(handDeck);
 //        tryToSB03(handDeck);
 //        tryToSUS01(handDeck);
 //        tryToSUS02(handDeck);
 //        tryToSUS08(handDeck);
     }
 
-    private void tryToSB01(Deck handDeck){
-        Deck cardDeck = handDeck.containCard("SB01");
+    private void tryToSB01(){
+        Deck handDeck = this.subject.getHandDeck();
+        Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SB01"));
         if(cardDeck != null){
             List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SB01");
+            Logger.printf("%s可以杀到的目标为：%s\n", this.subject.code, allTargets);
             if(allTargets.isEmpty()){
                Logger.printf("[杀]: 没有可用的目标\n");
                return;
@@ -47,6 +53,15 @@ public class PunchingStage extends Action {
             Logger.printf("[杀]: %s对%s出杀\n", this.subject.code, targets.get(0).code);
 
             new UseSB01Action(this.subject, targets, new LogicCard(cardDeck, cardDeck.transform("SB01"))).process(this);
+        }
+    }
+
+    private void tryToCarryWeapon(){
+        Deck handDeck = this.subject.getHandDeck();
+        Deck cardDeck = handDeck.getCardDeckIfContain(new IsWeaponCardRequirement());
+        if(cardDeck != null){
+            Logger.printf("%s装备了%s\n", this.subject.code, cardDeck);
+            new UseWeaponAction(this.subject, cardDeck).process(this);
         }
     }
 //

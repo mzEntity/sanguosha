@@ -1,7 +1,7 @@
 package org.example.game.role;
 
 import org.example.game.board.area.player.PlayerArea;
-import org.example.game.board.card.Deck;
+import org.example.game.board.card.deck.Deck;
 import org.example.game.role.hero.Condition;
 import org.example.game.role.hero.Hero;
 
@@ -9,7 +9,7 @@ public class Role {
 
     public String code;
     public int id;
-    public PlayerArea playerArea;
+    private PlayerArea playerArea;
 
     public Condition condition;
 
@@ -27,11 +27,15 @@ public class Role {
     }
 
     public Deck getHandDeck(){
-        return this.playerArea.handArea.cards;
+        return this.playerArea.getHandArea().cards;
     }
 
     public void matchArea(PlayerArea playerArea){
         this.playerArea = playerArea;
+    }
+
+    public PlayerArea getPlayerArea(){
+        return this.playerArea;
     }
 
     public void setHero(Hero hero){
@@ -59,6 +63,8 @@ public class Role {
     public void die(){
         this.condition.isAlive = false;
     }
+
+
 
     @Override
     public String toString() {

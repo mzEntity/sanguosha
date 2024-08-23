@@ -1,6 +1,6 @@
 package org.example.game.requirement;
 
-import org.example.game.board.card.LogicCard;
+import org.example.game.board.card.deck.LogicCard;
 
 /**
  * @Description:

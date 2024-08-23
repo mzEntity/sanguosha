@@ -2,7 +2,7 @@ package org.example.game;
 
 import org.example.game.board.*;
 import org.example.game.board.card.Card;
-import org.example.game.board.card.Deck;
+import org.example.game.board.card.deck.Deck;
 import org.example.game.board.card.CardBuilder;
 import org.example.game.role.Role;
 

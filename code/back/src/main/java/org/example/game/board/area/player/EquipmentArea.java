@@ -1,26 +1,45 @@
 package org.example.game.board.area.player;
 
-import org.example.game.board.card.Deck;
+import org.example.game.board.area.player.equipment.ArmorArea;
+import org.example.game.board.area.player.equipment.MountArea;
+import org.example.game.board.area.player.equipment.WeaponArea;
+import org.example.game.board.card.deck.Deck;
 
 public class EquipmentArea {
-    private Deck weapon;
-    private Deck armor;
-    private Deck retreatMount;
-    private Deck marchMount;
+    private final WeaponArea weaponArea;
+    private final ArmorArea armorArea;
+    private final MountArea retreatMountArea;
+    private final MountArea marchMountArea;
 
-    public EquipmentArea(Deck weapon, Deck armor, Deck retreatMount, Deck marchMount) {
-        this.weapon = weapon;
-        this.armor = armor;
-        this.retreatMount = retreatMount;
-        this.marchMount = marchMount;
+    public EquipmentArea(WeaponArea weaponArea, ArmorArea armorArea, MountArea retreatMountArea, MountArea marchMountArea) {
+        this.weaponArea = weaponArea;
+        this.armorArea = armorArea;
+        this.retreatMountArea = retreatMountArea;
+        this.marchMountArea = marchMountArea;
     }
 
     public Deck getAllEquipments(){
         Deck newDeck = new Deck();
-        this.weapon.moveAllToBack(newDeck);
-        this.armor.moveAllToBack(newDeck);
-        this.retreatMount.moveAllToBack(newDeck);
-        this.marchMount.moveAllToBack(newDeck);
+        this.weaponArea.getDeck().moveAllToBack(newDeck);
+        this.armorArea.getDeck().moveAllToBack(newDeck);
+        this.retreatMountArea.getDeck().moveAllToBack(newDeck);
+        this.marchMountArea.getDeck().moveAllToBack(newDeck);
         return newDeck;
+    }
+
+    public WeaponArea getWeaponArea() {
+        return weaponArea;
+    }
+
+    public ArmorArea getArmorArea() {
+        return armorArea;
+    }
+
+    public MountArea getRetreatMountArea() {
+        return retreatMountArea;
+    }
+
+    public MountArea getMarchMountArea() {
+        return marchMountArea;
     }
 }

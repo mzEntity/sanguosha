@@ -1,6 +1,9 @@
 package org.example.game.board.area;
 
-import org.example.game.board.card.Deck;
+import org.example.game.board.area.player.equipment.ArmorArea;
+import org.example.game.board.area.player.equipment.MountArea;
+import org.example.game.board.area.player.equipment.WeaponArea;
+import org.example.game.board.card.deck.Deck;
 import org.example.game.board.area.player.DivinationArea;
 import org.example.game.board.area.player.EquipmentArea;
 import org.example.game.board.area.player.HandArea;
@@ -41,7 +44,11 @@ public class AreaBuilder {
         Deck armorDeck = new Deck();
         Deck retreatMountDeck = new Deck();
         Deck marchMountDeck = new Deck();
-        EquipmentArea equipmentArea = new EquipmentArea(weaponDeck, armorDeck, retreatMountDeck, marchMountDeck);
+        WeaponArea weaponArea = new WeaponArea(weaponDeck);
+        ArmorArea armorArea = new ArmorArea(armorDeck);
+        MountArea retreatMountArea = new MountArea(retreatMountDeck);
+        MountArea marchMountArea = new MountArea(marchMountDeck);
+        EquipmentArea equipmentArea = new EquipmentArea(weaponArea, armorArea, retreatMountArea, marchMountArea);
 
         // 手牌区
         Deck handDeck = new Deck();

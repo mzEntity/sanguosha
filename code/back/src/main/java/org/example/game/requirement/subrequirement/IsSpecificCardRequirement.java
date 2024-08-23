@@ -1,7 +1,7 @@
 package org.example.game.requirement.subrequirement;
 
 
-import org.example.game.board.card.LogicCard;
+import org.example.game.board.card.deck.LogicCard;
 import org.example.game.requirement.CardRequirement;
 
 /**

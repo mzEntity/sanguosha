@@ -1,8 +1,8 @@
 package org.example.game.logic.action.require;
 
 import org.example.Main;
-import org.example.game.board.card.Deck;
-import org.example.game.board.card.LogicCard;
+import org.example.game.board.card.deck.Deck;
+import org.example.game.board.card.deck.LogicCard;
 import org.example.game.logic.Action;
 import org.example.game.requirement.RequireProcess;
 import org.example.game.requirement.subrequirement.IsSpecificCardRequirement;
@@ -27,7 +27,7 @@ public class RequireUseSB02Action extends Action {
     protected void mainLogic(Action from) {
         if(Main.SGS_DEBUG){
             Deck handDeck = this.subject.getHandDeck();
-            Deck sb02 = handDeck.containCard("SB02");
+            Deck sb02 = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SB02"));
             if(sb02 != null){
                 this.result = new LogicCard(sb02, sb02.transform("SB02"));
             }
