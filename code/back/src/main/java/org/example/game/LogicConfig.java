@@ -1,17 +1,11 @@
 package org.example.game;
 
-import org.example.game.filter.CompositeFilter;
-import org.example.game.filter.DefaultFilter;
+import org.example.game.filter.CompositeAndFilter;
 import org.example.game.filter.FilterTable;
-import org.example.game.filter.TargetFilter;
-import org.example.game.filter.subfilter.AliveFilter;
-import org.example.game.filter.subfilter.DistanceWithinAttackRangeFilter;
-import org.example.game.filter.subfilter.NotSelfFilter;
-import org.example.game.role.Role;
+import org.example.game.filter.subfilter.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class LogicConfig {
 
@@ -28,15 +22,56 @@ public class LogicConfig {
     }
 
     public void initTargetFilter(){
-        CompositeFilter SB01_filter = new CompositeFilter(
+        FilterTable.setFilter("SB01", new CompositeAndFilter(
                 new ArrayList<>(Arrays.asList(
                         new AliveFilter(),
                         new NotSelfFilter(),
                         new DistanceWithinAttackRangeFilter()
                 ))
-        );
-        FilterTable.setFilter("SB01", SB01_filter);
+        ));
+        FilterTable.setFilter("SUS01", new AliveFilter());
+        FilterTable.setFilter("SUS02", new CompositeAndFilter(
+                new ArrayList<>(Arrays.asList(
+                        new AliveFilter(),
+                        new NotSelfFilter()
+                ))
+        ));
         FilterTable.setFilter("SUS03", new AliveFilter());
+        FilterTable.setFilter("SUS04", new CompositeAndFilter(
+                new ArrayList<>(Arrays.asList(
+                        new AliveFilter(),
+                        new NotSelfFilter(),
+                        new WithinDistanceFilter(1),
+                        new WithCardInAreaFilter()
+                ))
+        ));
+        FilterTable.setFilter("SUS05", new AliveFilter());
+        FilterTable.setFilter("SUS06", new CompositeAndFilter(
+                new ArrayList<>(Arrays.asList(
+                        new AliveFilter(),
+                        new NotSelfFilter(),
+                        new WithCardInAreaFilter()
+                ))
+        ));
+        FilterTable.setFilter("SUS07", new CompositeAndFilter(
+                new ArrayList<>(Arrays.asList(
+                        new AliveFilter(),
+                        new SelfFilter()
+                ))
+        ));
+        FilterTable.setFilter("SUS08", new CompositeAndFilter(
+                new ArrayList<>(Arrays.asList(
+                        new AliveFilter(),
+                        new NotSelfFilter()
+                ))
+        ));
+        FilterTable.setFilter("SUS10", new CompositeAndFilter(
+                new ArrayList<>(Arrays.asList(
+                        new AliveFilter(),
+                        new NotSelfFilter(),
+                        new WithWeaponCardFilter()
+                ))
+        ));
     }
 
     public void initCardRequirement(){

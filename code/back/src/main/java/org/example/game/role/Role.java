@@ -48,6 +48,10 @@ public class Role {
         return this.condition.isAlive();
     }
 
+    public boolean isFullBlood(){
+        return this.condition.hp == this.condition.hpMax;
+    }
+
     public void gainHp(int count){
         this.condition.hp += count;
     }

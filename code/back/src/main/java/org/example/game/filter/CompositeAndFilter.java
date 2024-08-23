@@ -2,7 +2,6 @@ package org.example.game.filter;
 
 import org.example.game.role.Role;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,10 +9,10 @@ import java.util.List;
  * @Author: mzvltr
  * @Date: 2024/8/13
  */
-public class CompositeFilter implements TargetFilter {
+public class CompositeAndFilter implements TargetFilter {
     private List<TargetFilter> filters;
 
-    public CompositeFilter(List<TargetFilter> filters) {
+    public CompositeAndFilter(List<TargetFilter> filters) {
         this.filters = filters;
     }
 

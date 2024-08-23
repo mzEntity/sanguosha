@@ -8,4 +8,8 @@ public class DivinationArea {
     public DivinationArea(Deck tasks) {
         this.tasks = tasks;
     }
+
+    public boolean isEmpty(){
+        return tasks.isEmpty();
+    }
 }
