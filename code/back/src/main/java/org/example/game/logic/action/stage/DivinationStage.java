@@ -16,7 +16,7 @@ import java.util.function.BiFunction;
 
 public class DivinationStage extends RoleStage {
 
-    private static HashMap<DelayedSkillType, BiFunction<Role, LogicCard, DivinationAction>> divinationMap;
+    private static HashMap<DelayedSkillType, BiFunction<Role, LogicCard, Action>> divinationMap;
 
     static {
         divinationMap = new HashMap<>();
