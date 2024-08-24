@@ -29,6 +29,13 @@ public class LogicConfig {
                         new DistanceWithinAttackRangeFilter()
                 ))
         ));
+        FilterTable.setFilter("SB03", new CompositeAndFilter(
+                new ArrayList<>(Arrays.asList(
+                        new AliveFilter(),
+                        new SelfFilter(),
+                        new InjuredFilter()
+                ))
+        ));
         FilterTable.setFilter("SUS01", new AliveFilter());
         FilterTable.setFilter("SUS02", new CompositeAndFilter(
                 new ArrayList<>(Arrays.asList(

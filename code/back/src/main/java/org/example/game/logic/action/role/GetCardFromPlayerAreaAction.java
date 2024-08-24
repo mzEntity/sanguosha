@@ -1,5 +1,6 @@
 package org.example.game.logic.action.role;
 
+import org.example.game.board.card.deck.Deck;
 import org.example.game.logic.Action;
 import org.example.game.logic.action.card.MoveToHandAreaAction;
 import org.example.game.role.Role;
@@ -12,19 +13,17 @@ import org.example.game.role.Role;
 public class GetCardFromPlayerAreaAction extends Action {
     private Role by;
     private Role to;
-    private int count;
+    private Deck deck;
 
-    public GetCardFromPlayerAreaAction(Role subject, Role target, int count) {
+    public GetCardFromPlayerAreaAction(Role subject, Role target, Deck deck) {
         super();
         this.by = subject;
         this.to = target;
-        this.count = count;
+        this.deck = deck;
     }
 
     @Override
     protected void mainLogic(Action from) {
-        ChooseFromPlayerAreaProcess c = new ChooseFromPlayerAreaProcess(this.by, this.to, this.count);
-        c.process();
-        new MoveToHandAreaAction(this.by, c.getResult()).process(this);
+        new MoveToHandAreaAction(this.by, this.deck).process(this);
     }
 }

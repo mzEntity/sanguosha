@@ -5,10 +5,7 @@ import org.example.game.board.card.Card;
 import org.example.game.board.card.deck.Deck;
 import org.example.game.board.card.deck.LogicCard;
 import org.example.game.filter.FilterTable;
-import org.example.game.logic.action.use.UseArmorAction;
-import org.example.game.logic.action.use.UseMountAction;
-import org.example.game.logic.action.use.UseSB01Action;
-import org.example.game.logic.action.use.UseWeaponAction;
+import org.example.game.logic.action.use.*;
 import org.example.game.logic.action.use.undelayed.*;
 import org.example.game.requirement.subrequirement.IsArmorCardRequirement;
 import org.example.game.requirement.subrequirement.IsMountCardRequirement;
@@ -18,6 +15,9 @@ import org.example.game.role.Role;
 import org.example.game.logic.Action;
 import org.example.log.Logger;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -31,6 +31,9 @@ public class PunchingStage extends Action {
     @Override
     protected void mainLogic(Action from) {
         Logger.printf("PunchingStage:出牌阶段\n");
+        tryToSUS07();
+        tryToSB03();
+        tryToSUS10();
         tryToSUS05();
         tryToSUS06();
         tryToSUS04();
@@ -70,10 +73,27 @@ public class PunchingStage extends Action {
         }
     }
 
+    private void tryToSB03(){
+        Deck handDeck = this.subject.getHandDeck();
+        Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SB03"));
+        if(cardDeck != null){
+            List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SB03");
+            if(allTargets.isEmpty()){
+                Logger.printf("[桃]: 没有可用的目标\n");
+                return;
+            }
+            List<Role> targets = allTargets.subList(0, 1);
+            Logger.printf("[桃]: %s对%s使用桃\n", this.subject.code, targets.get(0).code);
+
+            new UseSB03Action(this.subject, targets, new LogicCard(cardDeck, cardDeck.transform("SB03"))).process(this);
+        }
+    }
+
     private void tryToSUS01(){
         Deck handDeck = this.subject.getHandDeck();
         Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SUS01"));
         if(cardDeck != null){
+            Logger.printf("[桃园结义]: %s\n", this.subject.code);
             List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SUS01");
             new UseSUS01Action(this.subject, allTargets, new LogicCard(cardDeck, cardDeck.transform("SUS01"))).process(this);
         }
@@ -139,7 +159,19 @@ public class PunchingStage extends Action {
         }
     }
 
-
+    private void tryToSUS07(){
+        Deck handDeck = this.subject.getHandDeck();
+        Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SUS07"));
+        if(cardDeck != null){
+            List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SUS07");
+            if(allTargets.isEmpty()){
+                Logger.printf("[无中生有]: 没有可用的目标\n");
+                return;
+            }
+            List<Role> targets = allTargets.subList(0, 1);
+            new UseSUS07Action(this.subject, targets, new LogicCard(cardDeck, cardDeck.transform("SUS04"))).process(this);
+        }
+    }
 
     private void tryToSUS08(){
         Deck handDeck = this.subject.getHandDeck();
@@ -147,6 +179,32 @@ public class PunchingStage extends Action {
         if(cardDeck != null){
             List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SUS08");
             new UseSUS08Action(this.subject, allTargets, new LogicCard(cardDeck, cardDeck.transform("SUS08"))).process(this);
+        }
+    }
+
+    private void tryToSUS10(){
+        Deck handDeck = this.subject.getHandDeck();
+        Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SUS10"));
+        if(cardDeck != null){
+            List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SUS10");
+            if(allTargets.isEmpty()){
+                Logger.printf("[借刀杀人]: 没有可用的目标\n");
+                return;
+            }
+            for(Role role : allTargets){
+                List<Role> killTargets = FilterTable.getAvailableTargets(role, "SB01");
+                if(killTargets.isEmpty()){
+                    Logger.printf("目标%s无法指定任何角色为杀的目标\n", role.code);
+                    continue;
+                }
+                List<List<Role>> roleTarget = new ArrayList<>();
+                roleTarget.add(new ArrayList<>(Arrays.asList(
+                        role, killTargets.get(0)
+                )));
+                new UseSUS10Action(this.subject, roleTarget, new LogicCard(cardDeck, cardDeck.transform("SUS10"))).process(this);
+                return;
+            }
+            Logger.printf("[借刀杀人]: 没有可用的目标\n");
         }
     }
 
