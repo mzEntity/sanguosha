@@ -1,15 +1,22 @@
 package org.example.game.role;
 
+import org.example.game.Game;
 import org.example.game.board.area.player.PlayerArea;
 import org.example.game.board.card.deck.Deck;
+import org.example.game.logic.Turn;
 import org.example.game.role.hero.Condition;
 import org.example.game.role.hero.Hero;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Role {
 
     public String code;
     public int id;
+
     private PlayerArea playerArea;
+    private List<Turn> turns;
 
     public Condition condition;
 
@@ -23,7 +30,22 @@ public class Role {
         this.id = id;
         this.playerArea = null;
         this.code = id + "";
+        this.turns = new ArrayList<>();
         this.hero = null;
+    }
+
+    public Turn getCurrentTurn(){
+        return this.getTurnByRoundNo(Game.getRoundNo());
+    }
+
+    public Turn getTurnByRoundNo(int roundNo){
+        if(roundNo >= turns.size()){
+            int moreTurnCount = roundNo - turns.size() + 1;
+            for(int i = 0; i < moreTurnCount; i++){
+                this.turns.add(new Turn(this));
+            }
+        }
+        return turns.get(roundNo);
     }
 
     public Deck getHandDeck(){

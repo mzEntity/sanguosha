@@ -23,11 +23,9 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class PunchingStage extends Action {
-    private Role subject;
+public class PunchingStage extends RoleStage {
     public PunchingStage(Role subject) {
-        super();
-        this.subject = subject;
+        super(subject);
     }
 
     @Override

@@ -9,10 +9,10 @@ import java.util.List;
  * @Author: mzvltr
  * @Date: 2024/8/13
  */
-public class CompositeRequirement extends CardRequirement {
+public class CompositeAndRequirement extends CardRequirement {
     private List<CardRequirement> requirements;
 
-    public CompositeRequirement(List<CardRequirement> requirements) {
+    public CompositeAndRequirement(List<CardRequirement> requirements) {
         super();
         this.requirements = requirements;
     }

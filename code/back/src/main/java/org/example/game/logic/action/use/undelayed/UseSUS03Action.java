@@ -35,7 +35,7 @@ public class UseSUS03Action extends Action{
             PollAndUseSUS09Process a = new PollAndUseSUS09Process(this, this.logicCard);
             a.process();
             if(a.getResult() == null){
-                new InjurySettleAction(this.subject, target).process(this);
+                new InjurySettleAction(this.subject, target, 1).process(this);
             }
         }
     }

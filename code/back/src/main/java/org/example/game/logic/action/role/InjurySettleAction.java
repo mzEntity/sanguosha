@@ -14,17 +14,23 @@ import org.example.log.Logger;
 public class InjurySettleAction extends Action {
     private Role by;
     private Role to;
+    private int count;
 
-    public InjurySettleAction(Role subject, Role target) {
+    public InjurySettleAction(Role subject, Role target, int count) {
         super();
         this.by = subject;
         this.to = target;
+        this.count = count;
     }
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("%s对%s造成一点伤害\n", this.by.code, this.to.code);
-        this.to.loseHp(1);
+        if(this.by == null){
+            Logger.printf("[无来源]对%s造成%d点伤害\n", this.to.code, this.count);
+        } else {
+            Logger.printf("%s对%s造成%s点伤害\n", this.by.code, this.to.code, this.count);
+        }
+        this.to.loseHp(this.count);
         boolean isDying = this.to.isDying();
         if(isDying){
             new DyingAction(this.to).process(this);

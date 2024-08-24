@@ -35,7 +35,7 @@ public class UseSB01Action extends Action {
             if(r.getResult() != null){
                 new UseSB02Action(target, this.logicCard, r.getResult()).process(this);
             }
-            new InjurySettleAction(this.subject, target).process(this);
+            new InjurySettleAction(this.subject, target, 1).process(this);
         }
     }
 }

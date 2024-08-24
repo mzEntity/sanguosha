@@ -71,9 +71,6 @@ public class DivinationArea {
     }
 
     public void finishTask(DelayedSkillType type){
-        if(!this.containTask(type)){
-            System.err.println("完成了一项未知的任务？？？");
-        }
         this.tasks.put(type, null);
     }
 

@@ -44,7 +44,7 @@ public class UseSUS02Action extends Action {
             if (r.getResult() != null) {
                 new PlaySB02Action(target, r.getResult()).process(this);
             } else {
-                new InjurySettleAction(this.subject, target).process(this);
+                new InjurySettleAction(this.subject, target, 1).process(this);
             }
         }
     }

@@ -22,9 +22,12 @@ public class Game extends Action {
 
     public Board board;
 
+    public int currentRoundNo;
+
     private Game() {
         super();
         this.activeRole = null;
+        this.currentRoundNo = 0;
     }
 
     public static Game getGame(){
@@ -58,6 +61,18 @@ public class Game extends Action {
         return game.roles;
     }
 
+    public static Role getAliveNext(Role subject){
+        if(!subject.isAlive()){
+            return null;
+        }
+        int index = game.roles.indexOf(subject);
+        for(int i = 0; i < game.roles.size(); i++){
+            Role r = game.roles.get((index + i + 1) % game.roles.size());
+            if(r.isAlive()) return r;
+        }
+        return null;
+    }
+
     public static List<Role> getAliveRoles(){
         List<Role> aliveRoles = new ArrayList<>();
         for(Role role: game.roles){
@@ -81,20 +96,20 @@ public class Game extends Action {
 
     @Override
     protected void mainLogic(Action from) {
+        this.currentRoundNo = 0;
         for(int i = 0; i < 50; i++){
-            int liveCount = 0;
             for(Role r: roles){
                 if(r.isAlive()){
-                    liveCount += 1;
-                    new Turn(r).process(this);
+                    r.getTurnByRoundNo(this.currentRoundNo).process(this);
                 } else {
                     Logger.printf("玩家%s已死亡，跳过回合\n", r.code);
                 }
             }
-            if(liveCount <= 1){
-                Logger.printf("仅剩%s名玩家，游戏结束\n", liveCount);
-                break;
-            }
+            this.currentRoundNo += 1;
         }
+    }
+
+    public static int getRoundNo(){
+        return game.currentRoundNo;
     }
 }

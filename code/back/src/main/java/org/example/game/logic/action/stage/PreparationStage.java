@@ -4,11 +4,9 @@ import org.example.game.role.Role;
 import org.example.game.logic.Action;
 import org.example.log.Logger;
 
-public class PreparationStage extends Action {
-    private Role subject;
+public class PreparationStage extends RoleStage {
     public PreparationStage(Role subject) {
-        super();
-        this.subject = subject;
+        super(subject);
     }
 
     @Override

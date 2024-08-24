@@ -7,13 +7,11 @@ import org.example.game.role.Role;
 import org.example.game.logic.Action;
 import org.example.log.Logger;
 
-public class DiscardingStage extends Action {
-    private Role subject;
+public class DiscardingStage extends RoleStage {
     private final Turn turn;
 
     public DiscardingStage(Role subject, Turn turn) {
-        super();
-        this.subject = subject;
+        super(subject);
         this.turn = turn;
     }
 

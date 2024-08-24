@@ -4,11 +4,9 @@ import org.example.game.logic.Action;
 import org.example.game.role.Role;
 import org.example.log.Logger;
 
-public class TurnStartStage extends Action {
-    private Role subject;
+public class TurnStartStage extends RoleStage {
     public TurnStartStage(Role subject) {
-        super();
-        this.subject = subject;
+        super(subject);
     }
 
     @Override
