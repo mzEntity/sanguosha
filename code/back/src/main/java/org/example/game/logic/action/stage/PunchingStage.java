@@ -6,6 +6,8 @@ import org.example.game.board.card.deck.Deck;
 import org.example.game.board.card.deck.LogicCard;
 import org.example.game.filter.FilterTable;
 import org.example.game.logic.action.use.*;
+import org.example.game.logic.action.use.delayed.UseSDS01Action;
+import org.example.game.logic.action.use.delayed.UseSDS02Action;
 import org.example.game.logic.action.use.undelayed.*;
 import org.example.game.requirement.subrequirement.IsArmorCardRequirement;
 import org.example.game.requirement.subrequirement.IsMountCardRequirement;
@@ -45,6 +47,8 @@ public class PunchingStage extends Action {
         tryToSUS03();
         tryToSUS08();
         tryToSB01();
+        tryToSDS01();
+        tryToSDS02();
 //        tryToSUS06(handDeck);
 //        tryToSUS05(handDeck);
 //        tryToSUS04(handDeck);
@@ -205,6 +209,34 @@ public class PunchingStage extends Action {
                 return;
             }
             Logger.printf("[借刀杀人]: 没有可用的目标\n");
+        }
+    }
+
+    private void tryToSDS01(){
+        Deck handDeck = this.subject.getHandDeck();
+        Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SDS01"));
+        if(cardDeck != null){
+            List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SDS01");
+            if(allTargets.isEmpty()){
+                Logger.printf("[闪电]: 没有可用的目标\n");
+                return;
+            }
+            Role target = allTargets.get(0);
+            new UseSDS01Action(this.subject, target, new LogicCard(cardDeck, cardDeck.transform("SDS01"))).process(this);
+        }
+    }
+
+    private void tryToSDS02(){
+        Deck handDeck = this.subject.getHandDeck();
+        Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SDS02"));
+        if(cardDeck != null){
+            List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SDS02");
+            if(allTargets.isEmpty()){
+                Logger.printf("[乐不思蜀]: 没有可用的目标\n");
+                return;
+            }
+            Role target = allTargets.get(0);
+            new UseSDS02Action(this.subject, target, new LogicCard(cardDeck, cardDeck.transform("SDS02"))).process(this);
         }
     }
 

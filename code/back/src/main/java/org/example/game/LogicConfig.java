@@ -1,7 +1,9 @@
 package org.example.game;
 
+import org.example.game.board.card.concrete.skill.delayed.DelayedSkillType;
 import org.example.game.filter.CompositeAndFilter;
 import org.example.game.filter.FilterTable;
+import org.example.game.filter.NotFilter;
 import org.example.game.filter.subfilter.*;
 
 import java.util.ArrayList;
@@ -82,6 +84,20 @@ public class LogicConfig {
                         new AliveFilter(),
                         new NotSelfFilter(),
                         new WithWeaponCardFilter()
+                ))
+        ));
+        FilterTable.setFilter("SDS01", new CompositeAndFilter(
+                new ArrayList<>(Arrays.asList(
+                        new AliveFilter(),
+                        new SelfFilter(),
+                        new NotWithSpecificDivinationTaskFilter(DelayedSkillType.SDS01)
+                ))
+        ));
+        FilterTable.setFilter("SDS02", new CompositeAndFilter(
+                new ArrayList<>(Arrays.asList(
+                        new AliveFilter(),
+                        new NotSelfFilter(),
+                        new NotWithSpecificDivinationTaskFilter(DelayedSkillType.SDS02)
                 ))
         ));
     }

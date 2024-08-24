@@ -37,6 +37,7 @@ public class ChooseFromPlayerAreaProcess {
             // TODO: for user
             return;
         } else {
+            List<Deck> divinationDecks = this.to.getPlayerArea().getDivinationArea().getDeck();
             List<Deck> seq = new ArrayList<>(Arrays.asList(
                     this.to.getHandDeck(),
                     this.to.getPlayerArea().getWeaponArea().getDeck(),
@@ -44,6 +45,7 @@ public class ChooseFromPlayerAreaProcess {
                     this.to.getPlayerArea().getRetreatMountArea().getDeck(),
                     this.to.getPlayerArea().getMarchMountArea().getDeck()
             ));
+            seq.addAll(divinationDecks);
             for(Deck d : seq){
                 if(need <= 0) break;
                 need -= selectSome(d, need);

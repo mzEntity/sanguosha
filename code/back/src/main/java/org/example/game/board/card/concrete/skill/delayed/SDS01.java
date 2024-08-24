@@ -3,14 +3,15 @@ package org.example.game.board.card.concrete.skill.delayed;
 import org.example.game.board.card.Card;
 import org.example.game.board.card.CardIdentifier;
 import org.example.game.board.card.Suit;
+import org.example.game.board.card.concrete.skill.DelayedSkillCard;
 
 /**
- * @Description:
+ * @Description: 闪电
  * @Author: mzvltr
  * @Date: 2024/8/23
  */
-public class SDS01 extends Card {
+public class SDS01 extends DelayedSkillCard {
     public SDS01(Suit suit, int point) {
-        super(suit, point, CardIdentifier.SDS01);
+        super(suit, point, CardIdentifier.SDS01, DelayedSkillType.SDS01);
     }
 }

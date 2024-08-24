@@ -38,6 +38,6 @@ public class DyingAction extends Action {
         PlayerArea area = this.subject.getPlayerArea();
         new MoveToDiscardAreaAction(area.getHandArea().cards).process(this);
         new MoveToDiscardAreaAction(area.getEquipmentArea().getAllEquipments()).process(this);
-        new MoveToDiscardAreaAction(area.getDivinationArea().tasks).process(this);
+        new MoveToDiscardAreaAction(area.getDivinationArea().combineDeck()).process(this);
     }
 }

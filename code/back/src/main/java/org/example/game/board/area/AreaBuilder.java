@@ -36,8 +36,7 @@ public class AreaBuilder {
 
     public PlayerArea buildPlayerArea(){
         // 判定区
-        Deck divinationDeck = new Deck();
-        DivinationArea divinationArea = new DivinationArea(divinationDeck);
+        DivinationArea divinationArea = new DivinationArea();
 
         // 装备区
         Deck weaponDeck = new Deck();
