@@ -33,7 +33,7 @@ public class PunchingStage extends RoleStage {
     protected void mainLogic(Action from) {
         Logger.printf("%s的出牌阶段\n", this.subject);
         tryToSUS07();
-        tryToSB03();
+//        tryToSB03();
         tryToSUS10();
         tryToSUS05();
         tryToSUS06();

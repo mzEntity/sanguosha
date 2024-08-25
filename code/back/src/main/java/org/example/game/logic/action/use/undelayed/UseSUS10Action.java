@@ -50,7 +50,7 @@ public class UseSUS10Action extends Action {
             RequireUseSB01Action r = new RequireUseSB01Action(user, target);
             r.process(this);
             if (r.getResult() != null) {
-                new UseSB01Action(user, new ArrayList<>(Collections.singleton(target)), r.getResult()).process(this);
+                new UseSB01Action(user, new ArrayList<>(Collections.singletonList(target)), r.getResult()).process(this);
             } else {
                 Deck d = user.getPlayerArea().getWeaponArea().getDeck();
                 new GetCardFromPlayerAreaAction(this.subject, user, d).process(this);

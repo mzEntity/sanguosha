@@ -16,7 +16,7 @@ public class SelfFilter implements TargetFilter {
     @Override
     public List<Role> filterTargets(Role subject, List<Role> targets) {
         if(targets.contains(subject)){
-            return new ArrayList<>(Collections.singleton(subject));
+            return new ArrayList<>(Collections.singletonList(subject));
         }
         return new ArrayList<>();
     }

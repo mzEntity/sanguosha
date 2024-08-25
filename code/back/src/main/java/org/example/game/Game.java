@@ -40,7 +40,7 @@ public class Game extends Action {
         }
 
         for(Role role: this.roles){
-            role.setHero(new Hero(20, 20, "Default Hero"));
+            role.setHero(new Hero(3, 3, "Default Hero"));
         }
 
         new LogicConfig().initLogic();

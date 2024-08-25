@@ -5,6 +5,7 @@ import org.example.game.logic.Action;
 import org.example.game.logic.action.global.GameOverAction;
 import org.example.game.logic.action.card.MoveToDiscardAreaAction;
 import org.example.game.board.area.player.PlayerArea;
+import org.example.game.logic.action.use.PollAndUseSB03Process;
 import org.example.game.role.Role;
 import org.example.log.Logger;
 
@@ -23,7 +24,9 @@ public class DyingAction extends Action {
     @Override
     protected void mainLogic(Action from) {
         Logger.printf("%s进入濒死状态\n", this.subject);
-        // TODO：求桃
+        int need = 1 - this.subject.condition.hp;
+        PollAndUseSB03Process p = new PollAndUseSB03Process(this, this.subject, need);
+        p.process();
         boolean isDead = this.subject.isDying();
         if(isDead){
             Logger.printf("玩家%s死亡\n", this.subject);

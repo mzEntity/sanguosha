@@ -12,14 +12,14 @@ import org.example.game.role.Role;
 /**
  * @Description:
  * @Author: mzvltr
- * @Date: 2024/8/24
+ * @Date: 2024/8/25
  */
-public class RequireUseSB01Action extends Action {
+public class RequireUseSB03Action extends Action {
     private final Role subject;
     private final Role target;
     private LogicCard result;
 
-    public RequireUseSB01Action(Role subject, Role target) {
+    public RequireUseSB03Action(Role subject, Role target) {
         super();
         this.subject = subject;
         this.target = target;
@@ -30,16 +30,16 @@ public class RequireUseSB01Action extends Action {
     protected void mainLogic(Action from) {
         if(Main.SGS_DEBUG){
             Deck handDeck = this.subject.getHandDeck();
-            Deck sb01 = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SB01"));
-            if(sb01 != null){
-                this.result = new LogicCard(sb01, CardIdentifier.SB01);
+            Deck sb03 = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SB03"));
+            if(sb03 != null){
+                this.result = new LogicCard(sb03, CardIdentifier.SB03);
             }
         } else {
-            AskToMeetRequirementProcess rp = new AskToMeetRequirementProcess(new IsSpecificCardRequirement("SB01"));
+            AskToMeetRequirementProcess rp = new AskToMeetRequirementProcess(new IsSpecificCardRequirement("SB03"));
             rp.decide();
             Deck d = rp.getResult();
             if(d != null){
-                this.result = new LogicCard(d, CardIdentifier.SB01);
+                this.result = new LogicCard(d, CardIdentifier.SB03);
             }
         }
     }
