@@ -1,5 +1,6 @@
 package org.example.game.board.card;
 
+import org.example.game.board.card.concrete.DefaultCard;
 import org.example.game.board.card.concrete.basic.SB01;
 import org.example.game.board.card.concrete.basic.SB02;
 import org.example.game.board.card.concrete.basic.SB03;
@@ -29,6 +30,7 @@ public class CardBuilder {
 
     static {
         allCards = new HashMap<>();
+        allCards.put(CardIdentifier.DEFAULT, (suit, point) -> new DefaultCard(suit, point));
         allCards.put(CardIdentifier.SB01, (suit, point) -> new SB01(suit, point));
         allCards.put(CardIdentifier.SB02, (suit, point) -> new SB02(suit, point));
         allCards.put(CardIdentifier.SB03, (suit, point) -> new SB03(suit, point));
@@ -64,7 +66,7 @@ public class CardBuilder {
     public static Card buildCard(Suit suit, int point, CardIdentifier cid){
         if(!allCards.containsKey(cid)){
             System.err.println("error in table pair " + cid.getId());
-            return null;
+            return new DefaultCard(suit, point);
         }
         return allCards.get(cid).apply(suit, point);
     }
@@ -101,7 +103,7 @@ public class CardBuilder {
         cardList.sort(new Comparator<Card>() {
             @Override
             public int compare(Card o1, Card o2) {
-                return o1.point - o2.point;
+                return o1.getPoint() - o2.getPoint();
             }
         });
         return cardList;

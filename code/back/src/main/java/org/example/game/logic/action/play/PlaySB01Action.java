@@ -12,18 +12,18 @@ import org.example.log.Logger;
  * @Date: 2024/8/23
  */
 public class PlaySB01Action extends Action {
-    private Role subject;
-    private LogicCard logicCard;
+    private final Role subject;
+    private final LogicCard targetSB01;
 
-    public PlaySB01Action(Role subject, LogicCard logicCard) {
+    public PlaySB01Action(Role subject, LogicCard targetSB01) {
         super();
         this.subject = subject;
-        this.logicCard = logicCard;
+        this.targetSB01 = targetSB01;
     }
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("%s打出一张[杀]\n", this.subject.code);
-        new MoveToDiscardAreaAction(this.logicCard.getPhysicalCard()).process(this);
+        Logger.printf("%s打出一张[杀]\n", this.subject);
+        new MoveToDiscardAreaAction(this.targetSB01.getDeck()).process(this);
     }
 }

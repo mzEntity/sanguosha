@@ -13,7 +13,7 @@ public class DrawStage extends RoleStage {
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("DrawStage:摸牌阶段\n");
+        Logger.printf("%s的摸牌阶段\n", this.subject);
         new DrawCardAction(this.subject, DEFAULT_DRAW_NUM).process(this);
     }
 }

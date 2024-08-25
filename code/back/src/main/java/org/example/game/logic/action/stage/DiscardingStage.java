@@ -17,7 +17,7 @@ public class DiscardingStage extends RoleStage {
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("DiscardingStage:弃牌阶段\n");
+        Logger.printf("%s的弃牌阶段\n", this.subject);
         int handLimit = this.turn.handLimit;
 
         Deck handDeck = this.subject.getPlayerArea().getHandArea().cards;

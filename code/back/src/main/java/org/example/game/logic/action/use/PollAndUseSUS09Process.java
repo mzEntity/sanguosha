@@ -15,8 +15,8 @@ import java.util.List;
  * @Date: 2024/8/23
  */
 public class PollAndUseSUS09Process {
-    private Action from;
-    private LogicCard target;
+    private final Action from;
+    private final LogicCard target;
 
     private Role subject;
     private LogicCard result;

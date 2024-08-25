@@ -22,10 +22,6 @@ public class Role {
 
     private Hero hero;
 
-    private Role left;
-    private Role right;
-
-
     public Role(int id) {
         this.id = id;
         this.playerArea = null;
@@ -74,6 +70,10 @@ public class Role {
         return this.condition.hp == this.condition.hpMax;
     }
 
+    public int getHpLost(){
+        return this.condition.hpMax - this.condition.hp;
+    }
+
     public void gainHp(int count){
         this.condition.hp += count;
     }
@@ -94,8 +94,6 @@ public class Role {
 
     @Override
     public String toString() {
-        return "Role{" +
-                "id=" + id +
-                '}';
+        return "Role(" + id + ')';
     }
 }

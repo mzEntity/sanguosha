@@ -10,23 +10,24 @@ import org.example.game.role.Role;
  * @Date: 2024/8/23
  */
 public class MoveToWeaponAreaAction extends Action {
-    private Role subject;
-    private Deck equipment;
+    private final Role subject;
+    private final Deck weapon;
 
-    public MoveToWeaponAreaAction(Role subject, Deck equipment) {
+    public MoveToWeaponAreaAction(Role subject, Deck weapon) {
         this.subject = subject;
-        this.equipment = equipment;
+        this.weapon = weapon;
     }
 
     @Override
     protected void mainLogic(Action from) {
-        if(equipment.size() != 1){
-            System.err.printf("必须一次性将1张装备置入装备区，而不是%s张\n", equipment.size());
+        if(weapon.size() != 1){
+            System.err.printf("必须一次性将1张装备置入装备区，而不是%s张\n", weapon.size());
         }
-        Deck target = this.subject.getPlayerArea().getWeaponArea().getDeck();
-        if(!target.isEmpty()){
-            new MoveToDiscardAreaAction(target).process(this);
+        Deck targetDeck = this.subject.getPlayerArea().getWeaponArea().getDeck();
+        if(!targetDeck.isEmpty()){
+            // 替换武器
+            new MoveToDiscardAreaAction(targetDeck).process(this);
         }
-        this.equipment.moveAllToBack(target);
+        this.weapon.moveAllToBack(targetDeck);
     }
 }

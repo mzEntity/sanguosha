@@ -12,9 +12,9 @@ import org.example.log.Logger;
  * @Date: 2024/8/12
  */
 public class InjurySettleAction extends Action {
-    private Role by;
-    private Role to;
-    private int count;
+    private final Role by;
+    private final Role to;
+    private final int count;
 
     public InjurySettleAction(Role subject, Role target, int count) {
         super();
@@ -26,9 +26,9 @@ public class InjurySettleAction extends Action {
     @Override
     protected void mainLogic(Action from) {
         if(this.by == null){
-            Logger.printf("[无来源]对%s造成%d点伤害\n", this.to.code, this.count);
+            Logger.printf("%s受到无来源的%d点伤害\n", this.to, this.count);
         } else {
-            Logger.printf("%s对%s造成%s点伤害\n", this.by.code, this.to.code, this.count);
+            Logger.printf("%s对%s造成%s点伤害\n", this.by, this.to, this.count);
         }
         this.to.loseHp(this.count);
         boolean isDying = this.to.isDying();

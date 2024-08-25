@@ -12,8 +12,8 @@ import org.example.log.Logger;
  * @Date: 2024/8/13
  */
 public class DrawCardAction extends Action {
-    private Role subject;
-    private int drawCount;
+    private final Role subject;
+    private final int drawCount;
 
     public DrawCardAction(Role subject, int drawCount) {
         super();
@@ -23,11 +23,10 @@ public class DrawCardAction extends Action {
 
     @Override
     protected void mainLogic(Action from) {
-        Deck handDeck = this.subject.getHandDeck();
         SelectFromDrawAreaAction sa = new SelectFromDrawAreaAction(this.drawCount);
         sa.process(this);
         Deck selected = sa.getSelectResult();
-        Logger.printf("%s从摸牌堆摸牌：%s\n", this.subject.code, selected);
+        Logger.printf("%s从牌堆中摸牌%s\n", this.subject, selected);
         new MoveToHandAreaAction(this.subject, selected).process(this);
     }
 }

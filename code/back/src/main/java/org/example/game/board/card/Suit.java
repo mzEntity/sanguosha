@@ -10,8 +10,8 @@ public enum Suit{
     Black_None("blackNone", Color.BLACK);
 
 
-    private String name;
-    private Color color;
+    private final String name;
+    private final Color color;
 
     Suit(String name, Color color) {
         this.name = name;

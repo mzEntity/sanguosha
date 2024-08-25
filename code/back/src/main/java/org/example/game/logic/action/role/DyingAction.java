@@ -14,7 +14,7 @@ import org.example.log.Logger;
  * @Date: 2024/8/13
  */
 public class DyingAction extends Action {
-    private Role subject;
+    private final Role subject;
     public DyingAction(Role subject) {
         super();
         this.subject = subject;
@@ -22,10 +22,11 @@ public class DyingAction extends Action {
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("%s进入濒死\n", this.subject.code);
+        Logger.printf("%s进入濒死状态\n", this.subject);
+        // TODO：求桃
         boolean isDead = this.subject.isDying();
         if(isDead){
-            Logger.printf("玩家%s死亡\n", this.subject.code);
+            Logger.printf("玩家%s死亡\n", this.subject);
             this.subject.die();
             if(Game.getGame().noMoreThanOneLeft()){
                 new GameOverAction("仅剩一人及以下存活，游戏结束").process(this);

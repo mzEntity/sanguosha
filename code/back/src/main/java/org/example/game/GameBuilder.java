@@ -20,7 +20,7 @@ public class GameBuilder {
         game.cards = new ArrayList<>(cardList);
         game.roles = roles;
         game.board = board;
-        Deck.prepareDeck(cardList).moveAllToBack(game.board.area.discardArea.discardedCards);
+        Deck.prepareDeck(cardList).moveAllToBack(game.board.area.discardArea.getDeck());
 
         return game;
     }

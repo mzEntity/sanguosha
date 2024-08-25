@@ -6,7 +6,7 @@ import org.example.log.Logger;
 
 
 public class Turn extends Action {
-    private Role subject;
+    private final Role subject;
     private boolean isSkipped;
 
     private final TurnStartStage turnStartStage;

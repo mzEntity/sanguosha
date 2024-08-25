@@ -12,9 +12,9 @@ import org.example.log.Logger;
  * @Date: 2024/8/24
  */
 public class UseSDS02Action extends Action {
-    private Role subject;
-    private Role target;
-    private LogicCard logicCard;
+    private final Role subject;
+    private final Role target;
+    private final LogicCard logicCard;
 
     public UseSDS02Action(Role subject, Role target, LogicCard logicCard) {
         super();
@@ -25,7 +25,7 @@ public class UseSDS02Action extends Action {
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("[乐不思蜀]: %s指定%s为目标\n", this.subject.code, target.code);
+        Logger.printf("[乐不思蜀]: %s指定%s为目标\n", this.subject, target);
         new MoveToDivinationAreaAction(this.target, logicCard).process(this);
     }
 }

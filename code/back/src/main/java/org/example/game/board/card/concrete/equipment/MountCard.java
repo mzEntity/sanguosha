@@ -11,7 +11,7 @@ import org.example.game.board.card.concrete.equipment.mount.MountType;
  * @Date: 2024/8/23
  */
 public class MountCard extends EquipmentCard {
-    private MountType mountType;
+    private final MountType mountType;
 
     public MountCard(Suit suit, int point, CardIdentifier cid, MountType type) {
         super(suit, point, cid);

@@ -12,22 +12,22 @@ import org.example.log.Logger;
  * @Date: 2024/8/23
  */
 public class MoveToHandAreaAction extends Action {
-    private Role subject;
-    private Deck targetDeck;
+    private final Role subject;
+    private final Deck deck;
 
     public MoveToHandAreaAction(Role subject, Deck deck) {
         super();
         this.subject = subject;
-        this.targetDeck = deck;
+        this.deck = deck;
     }
 
     @Override
     protected void mainLogic(Action from) {
-        if(this.targetDeck.size() <= 0){
+        if(this.deck.size() <= 0){
             return;
         }
-        Logger.printf("放入手牌区的牌：%s\n", this.targetDeck);
+        Logger.printf("放入%s手牌区的牌：%s\n", this.subject, this.deck);
         Deck handDeck = this.subject.getHandDeck();
-        this.targetDeck.moveAllToBack(handDeck);
+        this.deck.moveAllToBack(handDeck);
     }
 }

@@ -16,7 +16,7 @@ import java.util.function.BiFunction;
 
 public class DivinationStage extends RoleStage {
 
-    private static HashMap<DelayedSkillType, BiFunction<Role, LogicCard, Action>> divinationMap;
+    private static final HashMap<DelayedSkillType, BiFunction<Role, LogicCard, Action>> divinationMap;
 
     static {
         divinationMap = new HashMap<>();
@@ -30,14 +30,14 @@ public class DivinationStage extends RoleStage {
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("DivinationStage:判定阶段\n");
+        Logger.printf("%s的判定阶段\n", this.subject);
         DivinationArea area = this.subject.getPlayerArea().getDivinationArea();
         LogicCard task = null;
         task = area.getNextTask();
         while(task != null) {
-            DelayedSkillCard card = (DelayedSkillCard)task.getLogicCard();
+            DelayedSkillCard card = (DelayedSkillCard)task.getLogicRepresentation();
             DelayedSkillType type = card.getType();
-            Logger.printf("%s进行判定任务：%s\n", this.subject.code, type);
+            Logger.printf("%s进行判定任务：%s\n", this.subject, card.getCid().getName());
             divinationMap.get(type).apply(this.subject, task).process(this);
             area.finishTask(card.getType());
             task = area.getNextTask();

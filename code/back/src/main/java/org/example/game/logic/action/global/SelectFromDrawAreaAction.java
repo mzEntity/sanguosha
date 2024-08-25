@@ -10,7 +10,7 @@ import org.example.game.board.card.deck.Deck;
  * @Date: 2024/8/13
  */
 public class SelectFromDrawAreaAction extends Action {
-    private int selectCount;
+    private final int selectCount;
     private Deck selectResult;
 
     public SelectFromDrawAreaAction(int selectCount) {

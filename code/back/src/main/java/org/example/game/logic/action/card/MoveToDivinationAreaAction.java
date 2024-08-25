@@ -15,24 +15,24 @@ import org.example.game.role.Role;
  * @Date: 2024/8/24
  */
 public class MoveToDivinationAreaAction extends Action {
-    private Role subject;
-    private LogicCard target;
+    private final Role subject;
+    private final LogicCard divinationTask;
 
     public MoveToDivinationAreaAction(Role subject, LogicCard lc) {
         super();
         this.subject = subject;
-        this.target = lc;
+        this.divinationTask = lc;
     }
 
     @Override
     protected void mainLogic(Action from) {
-        Deck d = this.target.getPhysicalCard();
-        if(d.size() != 1){
+        Deck taskDeck = this.divinationTask.getDeck();
+        if(taskDeck.size() != 1){
             System.err.println("延时锦囊只能用一张牌表示");
         }
-        DelayedSkillCard c = (DelayedSkillCard) this.target.getLogicCard();
+        DelayedSkillCard c = (DelayedSkillCard) this.divinationTask.getLogicRepresentation();
         DelayedSkillType type = c.getType();
         DivinationArea area = this.subject.getPlayerArea().getDivinationArea();
-        area.addTask(type, this.target);
+        area.addTask(type, this.divinationTask);
     }
 }

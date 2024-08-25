@@ -2,6 +2,7 @@ package org.example.game.logic.action.stage;
 
 
 import org.example.game.board.card.Card;
+import org.example.game.board.card.CardIdentifier;
 import org.example.game.board.card.deck.Deck;
 import org.example.game.board.card.deck.LogicCard;
 import org.example.game.filter.FilterTable;
@@ -30,7 +31,7 @@ public class PunchingStage extends RoleStage {
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("PunchingStage:出牌阶段\n");
+        Logger.printf("%s的出牌阶段\n", this.subject);
         tryToSUS07();
         tryToSB03();
         tryToSUS10();
@@ -47,15 +48,6 @@ public class PunchingStage extends RoleStage {
         tryToSB01();
         tryToSDS01();
         tryToSDS02();
-//        tryToSUS06(handDeck);
-//        tryToSUS05(handDeck);
-//        tryToSUS04(handDeck);
-//        tryToSUS03(handDeck);
-//        tryToSUS07(handDeck);
-//        tryToSB03(handDeck);
-//        tryToSUS01(handDeck);
-//        tryToSUS02(handDeck);
-//        tryToSUS08(handDeck);
     }
 
     private void tryToSB01(){
@@ -63,15 +55,14 @@ public class PunchingStage extends RoleStage {
         Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SB01"));
         if(cardDeck != null){
             List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SB01");
-            Logger.printf("%s可以杀到的目标为：%s\n", this.subject.code, allTargets);
             if(allTargets.isEmpty()){
                Logger.printf("[杀]: 没有可用的目标\n");
                return;
             }
+            Logger.printf("%s可以杀到的目标为：%s\n", this.subject, allTargets);
+            Logger.printf("%s使用一张[杀]\n", this.subject);
             List<Role> targets = allTargets.subList(0, 1);
-            Logger.printf("[杀]: %s对%s出杀\n", this.subject.code, targets.get(0).code);
-
-            new UseSB01Action(this.subject, targets, new LogicCard(cardDeck, cardDeck.transform("SB01"))).process(this);
+            new UseSB01Action(this.subject, targets, new LogicCard(cardDeck, CardIdentifier.SB01)).process(this);
         }
     }
 
@@ -84,10 +75,9 @@ public class PunchingStage extends RoleStage {
                 Logger.printf("[桃]: 没有可用的目标\n");
                 return;
             }
+            Logger.printf("%s使用一张[桃]\n", this.subject);
             List<Role> targets = allTargets.subList(0, 1);
-            Logger.printf("[桃]: %s对%s使用桃\n", this.subject.code, targets.get(0).code);
-
-            new UseSB03Action(this.subject, targets, new LogicCard(cardDeck, cardDeck.transform("SB03"))).process(this);
+            new UseSB03Action(this.subject, targets, new LogicCard(cardDeck, CardIdentifier.SB03)).process(this);
         }
     }
 
@@ -95,9 +85,9 @@ public class PunchingStage extends RoleStage {
         Deck handDeck = this.subject.getHandDeck();
         Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SUS01"));
         if(cardDeck != null){
-            Logger.printf("[桃园结义]: %s\n", this.subject.code);
+            Logger.printf("%s使用一张[桃园结义]\n", this.subject);
             List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SUS01");
-            new UseSUS01Action(this.subject, allTargets, new LogicCard(cardDeck, cardDeck.transform("SUS01"))).process(this);
+            new UseSUS01Action(this.subject, allTargets, new LogicCard(cardDeck, CardIdentifier.SUS01)).process(this);
         }
     }
 
@@ -105,8 +95,9 @@ public class PunchingStage extends RoleStage {
         Deck handDeck = this.subject.getHandDeck();
         Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SUS02"));
         if(cardDeck != null){
+            Logger.printf("%s使用一张[万箭齐发]\n", this.subject);
             List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SUS02");
-            new UseSUS02Action(this.subject, allTargets, new LogicCard(cardDeck, cardDeck.transform("SUS02"))).process(this);
+            new UseSUS02Action(this.subject, allTargets, new LogicCard(cardDeck, CardIdentifier.SUS02)).process(this);
         }
     }
 
@@ -119,8 +110,9 @@ public class PunchingStage extends RoleStage {
                 Logger.printf("[决斗]: 没有可用的目标\n");
                 return;
             }
+            Logger.printf("%s使用一张[决斗]\n", this.subject);
             List<Role> targets = allTargets.subList(0, 1);
-            new UseSUS03Action(this.subject, targets, new LogicCard(cardDeck, cardDeck.transform("SUS03"))).process(this);
+            new UseSUS03Action(this.subject, targets, new LogicCard(cardDeck, CardIdentifier.SUS03)).process(this);
         }
     }
 
@@ -133,8 +125,9 @@ public class PunchingStage extends RoleStage {
                 Logger.printf("[顺手牵羊]: 没有可用的目标\n");
                 return;
             }
+            Logger.printf("%s使用一张[顺手牵羊]\n", this.subject);
             List<Role> targets = allTargets.subList(0, 1);
-            new UseSUS04Action(this.subject, targets, new LogicCard(cardDeck, cardDeck.transform("SUS04"))).process(this);
+            new UseSUS04Action(this.subject, targets, new LogicCard(cardDeck, CardIdentifier.SUS04)).process(this);
         }
     }
 
@@ -142,8 +135,9 @@ public class PunchingStage extends RoleStage {
         Deck handDeck = this.subject.getHandDeck();
         Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SUS05"));
         if(cardDeck != null){
+            Logger.printf("%s使用一张[五谷丰登]\n", this.subject);
             List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SUS05");
-            new UseSUS05Action(this.subject, allTargets, new LogicCard(cardDeck, cardDeck.transform("SUS05"))).process(this);
+            new UseSUS05Action(this.subject, allTargets, new LogicCard(cardDeck, CardIdentifier.SUS05)).process(this);
         }
     }
 
@@ -156,8 +150,9 @@ public class PunchingStage extends RoleStage {
                 Logger.printf("[过河拆桥]: 没有可用的目标\n");
                 return;
             }
+            Logger.printf("%s使用一张[过河拆桥]\n", this.subject);
             List<Role> targets = allTargets.subList(0, 1);
-            new UseSUS06Action(this.subject, targets, new LogicCard(cardDeck, cardDeck.transform("SUS06"))).process(this);
+            new UseSUS06Action(this.subject, targets, new LogicCard(cardDeck, CardIdentifier.SUS06)).process(this);
         }
     }
 
@@ -170,8 +165,9 @@ public class PunchingStage extends RoleStage {
                 Logger.printf("[无中生有]: 没有可用的目标\n");
                 return;
             }
+            Logger.printf("%s使用一张[无中生有]\n", this.subject);
             List<Role> targets = allTargets.subList(0, 1);
-            new UseSUS07Action(this.subject, targets, new LogicCard(cardDeck, cardDeck.transform("SUS04"))).process(this);
+            new UseSUS07Action(this.subject, targets, new LogicCard(cardDeck, CardIdentifier.SUS07)).process(this);
         }
     }
 
@@ -179,8 +175,9 @@ public class PunchingStage extends RoleStage {
         Deck handDeck = this.subject.getHandDeck();
         Deck cardDeck = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SUS08"));
         if(cardDeck != null){
+            Logger.printf("%s使用一张[南蛮入侵]\n", this.subject);
             List<Role> allTargets = FilterTable.getAvailableTargets(this.subject, "SUS08");
-            new UseSUS08Action(this.subject, allTargets, new LogicCard(cardDeck, cardDeck.transform("SUS08"))).process(this);
+            new UseSUS08Action(this.subject, allTargets, new LogicCard(cardDeck, CardIdentifier.SUS08)).process(this);
         }
     }
 
@@ -196,14 +193,15 @@ public class PunchingStage extends RoleStage {
             for(Role role : allTargets){
                 List<Role> killTargets = FilterTable.getAvailableTargets(role, "SB01");
                 if(killTargets.isEmpty()){
-                    Logger.printf("目标%s无法指定任何角色为杀的目标\n", role.code);
+                    Logger.printf("目标%s无法指定任何角色为杀的目标\n", role);
                     continue;
                 }
+                Logger.printf("%s使用一张[借刀杀人]\n", this.subject);
                 List<List<Role>> roleTarget = new ArrayList<>();
                 roleTarget.add(new ArrayList<>(Arrays.asList(
                         role, killTargets.get(0)
                 )));
-                new UseSUS10Action(this.subject, roleTarget, new LogicCard(cardDeck, cardDeck.transform("SUS10"))).process(this);
+                new UseSUS10Action(this.subject, roleTarget, new LogicCard(cardDeck, CardIdentifier.SUS10)).process(this);
                 return;
             }
             Logger.printf("[借刀杀人]: 没有可用的目标\n");
@@ -219,8 +217,9 @@ public class PunchingStage extends RoleStage {
                 Logger.printf("[闪电]: 没有可用的目标\n");
                 return;
             }
+            Logger.printf("%s使用一张[闪电]\n", this.subject);
             Role target = allTargets.get(0);
-            new UseSDS01Action(this.subject, target, new LogicCard(cardDeck, cardDeck.transform("SDS01"))).process(this);
+            new UseSDS01Action(this.subject, target, new LogicCard(cardDeck, CardIdentifier.SDS01)).process(this);
         }
     }
 
@@ -233,8 +232,9 @@ public class PunchingStage extends RoleStage {
                 Logger.printf("[乐不思蜀]: 没有可用的目标\n");
                 return;
             }
+            Logger.printf("%s使用一张[乐不思蜀]\n", this.subject);
             Role target = allTargets.get(0);
-            new UseSDS02Action(this.subject, target, new LogicCard(cardDeck, cardDeck.transform("SDS02"))).process(this);
+            new UseSDS02Action(this.subject, target, new LogicCard(cardDeck, CardIdentifier.SDS02)).process(this);
         }
     }
 
@@ -242,7 +242,7 @@ public class PunchingStage extends RoleStage {
         Deck handDeck = this.subject.getHandDeck();
         Deck cardDeck = handDeck.getCardDeckIfContain(new IsWeaponCardRequirement());
         if(cardDeck != null){
-            Logger.printf("%s装备了武器%s\n", this.subject.code, cardDeck);
+            Logger.printf("%s装备了武器%s\n", this.subject, cardDeck);
             new UseWeaponAction(this.subject, cardDeck).process(this);
         }
     }
@@ -251,7 +251,7 @@ public class PunchingStage extends RoleStage {
         Deck handDeck = this.subject.getHandDeck();
         Deck cardDeck = handDeck.getCardDeckIfContain(new IsArmorCardRequirement());
         if(cardDeck != null){
-            Logger.printf("%s装备了防具%s\n", this.subject.code, cardDeck);
+            Logger.printf("%s装备了防具%s\n", this.subject, cardDeck);
             new UseArmorAction(this.subject, cardDeck).process(this);
         }
     }
@@ -260,118 +260,8 @@ public class PunchingStage extends RoleStage {
         Deck handDeck = this.subject.getHandDeck();
         Deck cardDeck = handDeck.getCardDeckIfContain(new IsMountCardRequirement());
         if(cardDeck != null){
-            Logger.printf("%s装备了坐骑%s\n", this.subject.code, cardDeck);
+            Logger.printf("%s装备了坐骑%s\n", this.subject, cardDeck);
             new UseMountAction(this.subject, cardDeck).process(this);
         }
     }
-
-//
-//    private void tryToSB03(Deck handDeck){
-//        Deck cardDeck = handDeck.containCard("SB03");
-//        if(cardDeck != null && this.subject.getHero().condition.isHurt()){
-//            Logger.printf("受伤且有桃\n");
-//            Card card = cardDeck.getCard(0);
-//            List<Role> targets = new ArrayList<>();
-//            targets.add(this.subject);
-//            new Use_SB03_Action(this.subject, new LogicCard(cardDeck, card), targets).process(this);
-//        } else {
-//            Logger.printf("没有桃或没受伤\n");
-//        }
-//    }
-//
-//    private void tryToSUS01(Deck handDeck){
-//        Deck cardDeck = handDeck.containCard("SUS01");
-//        if(cardDeck != null){
-//            Logger.printf("有桃园结义，使用\n");
-//            Card card = cardDeck.getCard(0);
-//            new Use_SUS01_Action(this.subject, new LogicCard(cardDeck, card)).process(this);
-//        } else {
-//            Logger.printf("没有桃园结义，过\n");
-//        }
-//    }
-//
-//    private void tryToSUS02(Deck handDeck){
-//        Deck cardDeck = handDeck.containCard("SUS02");
-//        if(cardDeck != null){
-//            Logger.printf("有万箭齐发，使用\n");
-//            Card card = cardDeck.getCard(0);
-//            new Use_SUS02_Action(this.subject, new LogicCard(cardDeck, card)).process(this);
-//        } else {
-//            Logger.printf("没有万箭齐发，过\n");
-//        }
-//    }
-//
-//    private void tryToSUS03(Deck handDeck){
-//        Deck cardDeck = handDeck.containCard("SUS03");
-//        if(cardDeck != null){
-//            Logger.printf("有决斗，对下家出决斗\n");
-//            Card card = cardDeck.getCard(0);
-//            List<Role> targets = new ArrayList<>();
-//            targets.add(this.subject.right);
-//            new Use_SUS03_Action(this.subject, new LogicCard(cardDeck, card), targets).process(this);
-//        } else {
-//            Logger.printf("没有决斗，过\n");
-//        }
-//    }
-//
-//    private void tryToSUS04(Deck handDeck){
-//        Deck cardDeck = handDeck.containCard("SUS04");
-//        if(cardDeck != null){
-//            Logger.printf("有顺手牵羊，对下家出顺手牵羊\n");
-//            Card card = cardDeck.getCard(0);
-//            List<Role> targets = new ArrayList<>();
-//            targets.add(this.subject.right);
-//            new Use_SUS04_Action(this.subject, new LogicCard(cardDeck, card), targets).process(this);
-//        } else {
-//            Logger.printf("没有顺手牵羊，过\n");
-//        }
-//    }
-//
-//    private void tryToSUS05(Deck handDeck){
-//        Deck cardDeck = handDeck.containCard("SUS05");
-//        if(cardDeck != null){
-//            Logger.printf("有五谷丰登，使用\n");
-//            Card card = cardDeck.getCard(0);
-//            new Use_SUS05_Action(this.subject, new LogicCard(cardDeck, card)).process(this);
-//        } else {
-//            Logger.printf("没有五谷丰登，过\n");
-//        }
-//    }
-//
-//    private void tryToSUS06(Deck handDeck){
-//        Deck cardDeck = handDeck.containCard("SUS06");
-//        if(cardDeck != null){
-//            Logger.printf("有过河拆桥，对下家出过河拆桥\n");
-//            Card card = cardDeck.getCard(0);
-//            List<Role> targets = new ArrayList<>();
-//            targets.add(this.subject.right);
-//            new Use_SUS06_Action(this.subject, new LogicCard(cardDeck, card), targets).process(this);
-//        } else {
-//            Logger.printf("没有过河拆桥，过\n");
-//        }
-//    }
-//
-//    private void tryToSUS07(Deck handDeck){
-//        Deck cardDeck = handDeck.containCard("SUS07");
-//        if(cardDeck != null){
-//            Logger.printf("有无中生有，使用无中生有\n");
-//            Card card = cardDeck.getCard(0);
-//            List<Role> targets = new ArrayList<>();
-//            targets.add(this.subject);
-//            new Use_SUS07_Action(this.subject, new LogicCard(cardDeck, card), targets).process(this);
-//        } else {
-//            Logger.printf("没有无中生有，过\n");
-//        }
-//    }
-//
-//    private void tryToSUS08(Deck handDeck){
-//        Deck cardDeck = handDeck.containCard("SUS08");
-//        if(cardDeck != null){
-//            Logger.printf("有南蛮入侵，使用\n");
-//            Card card = cardDeck.getCard(0);
-//            new Use_SUS08_Action(this.subject, new LogicCard(cardDeck, card)).process(this);
-//        } else {
-//            Logger.printf("无万箭齐发，过\n");
-//        }
-//    }
 }

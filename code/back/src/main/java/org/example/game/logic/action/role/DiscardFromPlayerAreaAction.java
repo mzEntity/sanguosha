@@ -11,9 +11,9 @@ import org.example.game.role.Role;
  * @Date: 2024/8/23
  */
 public class DiscardFromPlayerAreaAction extends Action {
-    private Role by;
-    private Role to;
-    private int count;
+    private final Role by;
+    private final Role to;
+    private final int count;
 
     public DiscardFromPlayerAreaAction(Role subject, Role target, int count) {
         super();

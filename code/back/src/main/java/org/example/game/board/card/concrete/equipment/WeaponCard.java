@@ -10,7 +10,8 @@ import org.example.game.board.card.concrete.EquipmentCard;
  * @Date: 2024/8/23
  */
 public class WeaponCard extends EquipmentCard {
-    private int attackRange;
+    private final int attackRange;
+
     public WeaponCard(Suit suit, int point, CardIdentifier cid, int attackRange) {
         super(suit, point, cid);
         this.attackRange = attackRange;

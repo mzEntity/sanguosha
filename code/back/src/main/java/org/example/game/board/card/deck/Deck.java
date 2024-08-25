@@ -83,22 +83,23 @@ public class Deck {
         return this.cards.get(index);
     }
 
-    public Card transform(String id){
+    public Suit getSuitOfDeck(){
         Suit suit = null;
         for(Card c: this.cards){
-            if(suit == null || suit.equals(c.suit)){
-                suit = c.suit;
-            } else if(suit.getColor() == c.suit.getColor()){
+            if(suit == null || suit.equals(c.getSuit())){
+                suit = c.getSuit();
+            } else if(suit.getColor() == c.getSuit().getColor()){
                 suit = suit.removeColor();
             } else {
                 suit = Suit.None;
             }
         }
-        int point = 0;
-        if(this.size() == 1){
-            point = this.cards.get(0).point;
-        }
-        return CardBuilder.buildCard(suit, point, id);
+        return suit;
+    }
+
+    public int getPointOfDeck(){
+        if(this.size() == 1) return this.cards.get(0).getPoint();
+        return 0;
     }
 
     private Deck subDeck(int from, int to){
@@ -173,9 +174,10 @@ public class Deck {
     // 仅测试用
     public Deck getCardDeckIfContain(CardRequirement cr){
         for(Card c: this.cards){
-            LogicCard logicCard = new LogicCard(null, c);
+            Deck subDeck = this.subDeck(c);
+            LogicCard logicCard = new LogicCard(subDeck, c.getCid());
             if(cr.isMet(logicCard)){
-                return this.splitSubDeck(this.subDeck(c));
+                return this.splitSubDeck(subDeck);
             }
         }
         return null;

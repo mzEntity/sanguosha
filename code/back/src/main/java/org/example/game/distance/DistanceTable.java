@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * @Description:
+ * @Description: 计算角色间距离
  * @Author: mzvltr
  * @Date: 2024/8/14
  */
@@ -51,6 +51,7 @@ public class DistanceTable {
         if(subjectDistance.containsKey(target)){
             return subjectDistance.get(target);
         }
+        System.err.println("getDistance: 出错了");
         return -1;
     }
 }

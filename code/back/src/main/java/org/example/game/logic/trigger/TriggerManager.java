@@ -10,7 +10,7 @@ import java.util.List;
  * @Date: 2024/8/22
  */
 public class TriggerManager {
-    private static TriggerTable triggerTable = new TriggerTable();
+    private static final TriggerTable triggerTable = new TriggerTable();
 
     public static void trigger(TriggerIdentifier tid, Action from){
         List<Action> actionBefore = triggerTable.getActions(tid);

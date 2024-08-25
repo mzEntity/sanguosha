@@ -11,9 +11,9 @@ import org.example.game.role.Role;
  * @Date: 2024/8/23
  */
 public class GetCardFromPlayerAreaAction extends Action {
-    private Role by;
-    private Role to;
-    private Deck deck;
+    private final Role by;
+    private final Role to;
+    private final Deck deck;
 
     public GetCardFromPlayerAreaAction(Role subject, Role target, Deck deck) {
         super();

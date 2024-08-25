@@ -10,6 +10,7 @@ import org.example.game.logic.action.card.MoveToDiscardAreaAction;
 import org.example.game.logic.action.card.MoveToDivinationAreaAction;
 import org.example.game.logic.action.role.InjurySettleAction;
 import org.example.game.logic.action.use.PollAndUseSUS09Process;
+import org.example.game.requirement.CardRequirement;
 import org.example.game.requirement.CompositeAndRequirement;
 import org.example.game.requirement.subrequirement.IsPointGreaterThanRequirement;
 import org.example.game.requirement.subrequirement.IsPointLessThanRequirement;
@@ -25,36 +26,42 @@ import java.util.Arrays;
  * @Date: 2024/8/24
  */
 public class SDS01DivinationAction extends Action{
-    private LogicCard logicCard;
-    private Role subject;
+    private final LogicCard targetSDS01;
+    private final Role subject;
 
-    public SDS01DivinationAction(Role subject, LogicCard logicCard) {
+    private static final CardRequirement workRequirement;
+
+    static {
+        workRequirement = new CompositeAndRequirement(
+                new ArrayList<>(Arrays.asList(
+                        new IsSpecificSuitRequirement(Suit.Spade),
+                        new IsPointGreaterThanRequirement(1),
+                        new IsPointLessThanRequirement(10)
+                ))
+        );
+    }
+
+    public SDS01DivinationAction(Role subject, LogicCard targetSDS01) {
         super();
         this.subject = subject;
-        this.logicCard = logicCard;
+        this.targetSDS01 = targetSDS01;
     }
 
     @Override
     public void mainLogic(Action from) {
-        PollAndUseSUS09Process p = new PollAndUseSUS09Process(this, this.logicCard);
+        PollAndUseSUS09Process p = new PollAndUseSUS09Process(this, this.targetSDS01);
         p.process();
         if(p.getResult() == null){
-            DivinationAction d = new DivinationAction(this.subject);
-            d.process(this);
-            if(d.isMet(new CompositeAndRequirement(
-                    new ArrayList<>(Arrays.asList(
-                            new IsSpecificSuitRequirement(Suit.Spade),
-                            new IsPointGreaterThanRequirement(1),
-                            new IsPointLessThanRequirement(10)
-                    ))
-            ))){
+            DivinationAction divination = new DivinationAction(this.subject);
+            divination.process(this);
+            if(divination.isMet(workRequirement)){
                 new InjurySettleAction(null, this.subject, 3).process(this);
-                new MoveToDiscardAreaAction(d.getResult()).process(this);
-                new MoveToDiscardAreaAction(logicCard.getPhysicalCard()).process(this);
+                new MoveToDiscardAreaAction(divination.getResult()).process(this);
+                new MoveToDiscardAreaAction(this.targetSDS01.getDeck()).process(this);
                 return;
             }
-            new MoveToDiscardAreaAction(d.getResult()).process(this);
+            new MoveToDiscardAreaAction(divination.getResult()).process(this);
         }
-        new MoveToDivinationAreaAction(Game.getAliveNext(this.subject), logicCard).process(this);
+        new MoveToDivinationAreaAction(Game.getAliveNext(this.subject), this.targetSDS01).process(this);
     }
 }

@@ -11,8 +11,8 @@ import org.example.game.role.Role;
  * @Date: 2024/8/23
  */
 public class UseArmorAction extends Action {
-    private Role subject;
-    private Deck target;
+    private final Role subject;
+    private final Deck target;
 
     public UseArmorAction(Role subject, Deck target) {
         super();

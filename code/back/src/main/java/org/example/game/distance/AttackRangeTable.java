@@ -5,7 +5,7 @@ import org.example.game.board.card.concrete.equipment.WeaponCard;
 import org.example.game.role.Role;
 
 /**
- * @Description:
+ * @Description: 计算角色攻击范围
  * @Author: mzvltr
  * @Date: 2024/8/14
  */

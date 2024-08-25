@@ -16,9 +16,9 @@ import java.util.List;
  * @Date: 2024/8/24
  */
 public class UseSB03Action extends Action {
-    private Role subject;
-    private List<Role> targets;
-    private LogicCard logicCard;
+    private final Role subject;
+    private final List<Role> targets;
+    private final LogicCard logicCard;
 
     public UseSB03Action(Role subject, List<Role> targets, LogicCard logicCard) {
         super();
@@ -29,9 +29,9 @@ public class UseSB03Action extends Action {
 
     @Override
     protected void mainLogic(Action from) {
-        new MoveToDiscardAreaAction(this.logicCard.getPhysicalCard()).process(this);
+        new MoveToDiscardAreaAction(this.logicCard.getDeck()).process(this);
         for(Role target : targets) {
-            new GainHealthAction(this.subject, target).process(this);
+            new GainHealthAction(this.subject, target, 1).process(this);
         }
     }
 }

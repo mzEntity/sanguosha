@@ -12,22 +12,25 @@ import org.example.log.Logger;
  * @Date: 2024/8/23
  */
 public class GainHealthAction extends Action {
-    private Role by;
-    private Role to;
+    private final Role by;
+    private final Role to;
+    private final int count;
 
-    public GainHealthAction(Role subject, Role target) {
+    public GainHealthAction(Role subject, Role target, int count) {
         super();
         this.by = subject;
         this.to = target;
+        this.count = count;
     }
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("%s让%s回复一点体力值\n", this.by.code, this.to.code);
         if(this.to.isFullBlood()){
             System.err.println("满血状态，出错了");
             return;
         }
-        this.to.gainHp(1);
+        int gainCount = Math.min(this.to.getHpLost(), this.count);
+        Logger.printf("%s让%s回复%d点体力值\n", this.by, this.to, gainCount);
+        this.to.gainHp(gainCount);
     }
 }

@@ -1,6 +1,7 @@
 package org.example.game.logic.action.require;
 
 import org.example.Main;
+import org.example.game.board.card.CardIdentifier;
 import org.example.game.board.card.deck.Deck;
 import org.example.game.board.card.deck.LogicCard;
 import org.example.game.logic.Action;
@@ -14,8 +15,8 @@ import org.example.game.role.Role;
  * @Date: 2024/8/24
  */
 public class RequireUseSB01Action extends Action {
-    private Role subject;
-    private Role target;
+    private final Role subject;
+    private final Role target;
     private LogicCard result;
 
     public RequireUseSB01Action(Role subject, Role target) {
@@ -31,14 +32,14 @@ public class RequireUseSB01Action extends Action {
             Deck handDeck = this.subject.getHandDeck();
             Deck sb02 = handDeck.getCardDeckIfContain(new IsSpecificCardRequirement("SB01"));
             if(sb02 != null){
-                this.result = new LogicCard(sb02, sb02.transform("SB01"));
+                this.result = new LogicCard(sb02, CardIdentifier.SB01);
             }
         } else {
             AskToMeetRequirementProcess rp = new AskToMeetRequirementProcess(new IsSpecificCardRequirement("SB01"));
             rp.decide();
             Deck d = rp.getResult();
             if(d != null){
-                this.result = new LogicCard(d, d.transform("SB01"));
+                this.result = new LogicCard(d, CardIdentifier.SB01);
             }
         }
     }

@@ -20,9 +20,9 @@ import java.util.List;
  * @Date: 2024/8/23
  */
 public class UseSUS05Action extends Action {
-    private Role subject;
-    private List<Role> targets;
-    private LogicCard logicCard;
+    private final Role subject;
+    private final List<Role> targets;
+    private final LogicCard logicCard;
 
     public UseSUS05Action(Role subject, List<Role> targets, LogicCard logicCard) {
         super();
@@ -33,13 +33,13 @@ public class UseSUS05Action extends Action {
 
     @Override
     protected void mainLogic(Action from) {
-        new MoveToDiscardAreaAction(this.logicCard.getPhysicalCard()).process(this);
+        new MoveToDiscardAreaAction(this.logicCard.getDeck()).process(this);
         int count = this.targets.size();
         SelectFromDrawAreaAction s = new SelectFromDrawAreaAction(count);
         s.process(this);
         Deck table = s.getSelectResult();
         for(Role target : targets) {
-            Logger.printf("[五谷丰登]: %s指定%s为目标\n", this.subject.code, target.code);
+            Logger.printf("[五谷丰登]: %s指定%s为目标\n", this.subject, target);
             PollAndUseSUS09Process a = new PollAndUseSUS09Process(this, this.logicCard);
             a.process();
             if(a.getResult() != null){

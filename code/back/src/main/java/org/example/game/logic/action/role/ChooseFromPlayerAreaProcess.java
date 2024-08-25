@@ -17,11 +17,11 @@ import java.util.List;
  * @Date: 2024/8/23
  */
 public class ChooseFromPlayerAreaProcess {
-    private Role by;
-    private Role to;
+    private final Role by;
+    private final Role to;
 
-    private int count;
-    private HashMap<Deck, Deck> cards;
+    private final int count;
+    private final HashMap<Deck, Deck> cards;
 
     public ChooseFromPlayerAreaProcess(Role subject, Role target, int count) {
         super();

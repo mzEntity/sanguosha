@@ -31,7 +31,7 @@ public class DivinationArea {
         if(task == null) {
             return false;
         }
-        Deck d = task.getPhysicalCard();
+        Deck d = task.getDeck();
         if(d.isEmpty()){
             this.tasks.put(type, null);
             return false;
@@ -48,7 +48,7 @@ public class DivinationArea {
         for(DelayedSkillType type : tasks.keySet()){
             LogicCard card = tasks.get(type);
             if(card != null){
-                Deck d = card.getPhysicalCard();
+                Deck d = card.getDeck();
                 if(!d.isEmpty()){
                     decks.add(d);
                 }
@@ -61,7 +61,7 @@ public class DivinationArea {
         for(DelayedSkillType type : tasks.keySet()){
             LogicCard card = tasks.get(type);
             if(card != null){
-                Deck d = card.getPhysicalCard();
+                Deck d = card.getDeck();
                 if(!d.isEmpty()){
                     return card;
                 }
@@ -79,7 +79,7 @@ public class DivinationArea {
         for(DelayedSkillType type : tasks.keySet()){
             LogicCard card = tasks.get(type);
             if(card != null){
-                Deck d = card.getPhysicalCard();
+                Deck d = card.getDeck();
                 if(!d.isEmpty()){
                     d.moveAllToBack(result);
                 }

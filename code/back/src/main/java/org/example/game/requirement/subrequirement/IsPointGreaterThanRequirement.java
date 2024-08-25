@@ -17,6 +17,6 @@ public class IsPointGreaterThanRequirement extends CardRequirement {
 
     @Override
     public boolean isMet(LogicCard lc) {
-        return lc.getLogicCard().point > this.point;
+        return lc.getPoint() > this.point;
     }
 }

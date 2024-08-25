@@ -11,6 +11,6 @@ public class TurnFinishStage extends RoleStage {
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("TurnFinishStage:回合结束阶段\n");
+        Logger.printf("%s的回合结束阶段\n", this.subject);
     }
 }

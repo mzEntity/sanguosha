@@ -50,11 +50,11 @@ public class Game extends Action {
     }
 
     public static Deck getDiscardDeck(){
-        return game.board.area.discardArea.discardedCards;
+        return game.board.area.discardArea.getDeck();
     }
 
     public static Deck getDrawDeck(){
-        return game.board.area.drawArea.available;
+        return game.board.area.drawArea.getDeck();
     }
 
     public static List<Role> getRoles(){

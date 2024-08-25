@@ -3,7 +3,6 @@ package org.example.game;
 import org.example.game.board.card.concrete.skill.delayed.DelayedSkillType;
 import org.example.game.filter.CompositeAndFilter;
 import org.example.game.filter.FilterTable;
-import org.example.game.filter.NotFilter;
 import org.example.game.filter.subfilter.*;
 
 import java.util.ArrayList;

@@ -1,9 +1,9 @@
 package org.example.game.board.card;
 
 public class Card {
-    public Suit suit;
-    public int point;
-    public CardIdentifier cid;
+    private final Suit suit;
+    private final int point;
+    private final CardIdentifier cid;
 
     public Card(Suit suit, int point, CardIdentifier cid) {
         this.suit = suit;
@@ -11,6 +11,17 @@ public class Card {
         this.cid = cid;
     }
 
+    public Suit getSuit() {
+        return suit;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public CardIdentifier getCid() {
+        return cid;
+    }
 
     @Override
     public String toString() {

@@ -9,23 +9,24 @@ import org.example.game.role.Role;
  * @Date: 2024/8/23
  */
 public class AskToSelectFromDeckProcess {
-    private Role subject;
-    private Deck target;
-    private int count;
+    private final Role subject;
+    private final Deck targetDeck;
+    private final int count;
     private Deck result;
 
-    public AskToSelectFromDeckProcess(Role subject, Deck target, int count) {
+    public AskToSelectFromDeckProcess(Role subject, Deck targetDeck, int count) {
         this.subject = subject;
-        this.target = target;
+        this.targetDeck = targetDeck;
         this.count = count;
         this.result = null;
     }
 
     public void process(){
-        if(this.target.size() < this.count){
+        if(this.targetDeck.size() < this.count){
             System.err.println("牌不够选择！\n");
+            return;
         }
-        this.result = this.target.selectSomeAsDeck(0, count);
+        this.result = this.targetDeck.selectSomeAsDeck(0, count);
     }
 
     public Deck getResult() {

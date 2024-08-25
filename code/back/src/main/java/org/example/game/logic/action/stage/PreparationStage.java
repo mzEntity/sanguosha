@@ -11,6 +11,6 @@ public class PreparationStage extends RoleStage {
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("PreparationStage:准备阶段\n");
+        Logger.printf("%s的准备阶段\n", this.subject);
     }
 }

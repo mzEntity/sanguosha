@@ -1,5 +1,6 @@
 package org.example.game.logic.action.divination;
 
+import org.example.game.board.card.Card;
 import org.example.game.board.card.deck.Deck;
 import org.example.game.board.card.deck.LogicCard;
 import org.example.game.logic.Action;
@@ -14,7 +15,7 @@ import org.example.log.Logger;
  * @Date: 2024/8/24
  */
 public class DivinationAction extends Action {
-    private Role subject;
+    private final Role subject;
     private Deck result;
 
     public DivinationAction(Role subject) {
@@ -27,11 +28,12 @@ public class DivinationAction extends Action {
         SelectFromDrawAreaAction s = new SelectFromDrawAreaAction(1);
         s.process(this);
         this.result = s.getSelectResult();
-        Logger.printf("判定结果为：%s\n", this.result);
+        Logger.printf("%s的判定结果为：%s\n", this.subject, this.result);
     }
 
     public boolean isMet(CardRequirement c){
-        LogicCard l = new LogicCard(this.result, this.result.getCard(0));
+        Card card = this.result.getCard(0);
+        LogicCard l = new LogicCard(this.result, card.getCid());
         return c.isMet(l);
     }
 

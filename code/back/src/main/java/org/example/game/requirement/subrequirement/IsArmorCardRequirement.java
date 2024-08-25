@@ -13,6 +13,6 @@ import org.example.game.requirement.CardRequirement;
 public class IsArmorCardRequirement extends CardRequirement {
     @Override
     public boolean isMet(LogicCard lc) {
-        return lc.getLogicCard() instanceof ArmorCard;
+        return lc.getLogicRepresentation() instanceof ArmorCard;
     }
 }

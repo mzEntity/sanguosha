@@ -13,29 +13,30 @@ import org.example.game.role.Role;
  * @Date: 2024/8/23
  */
 public class MoveToMountAreaAction extends Action {
-    private Role subject;
-    private Deck equipment;
+    private final Role subject;
+    private final Deck mountDeck;
 
-    public MoveToMountAreaAction(Role subject, Deck equipment) {
+    public MoveToMountAreaAction(Role subject, Deck mountDeck) {
         this.subject = subject;
-        this.equipment = equipment;
+        this.mountDeck = mountDeck;
     }
 
     @Override
     protected void mainLogic(Action from) {
-        if(equipment.size() != 1){
-            System.err.printf("必须一次性将1张装备置入装备区，而不是%s张\n", equipment.size());
+        if(mountDeck.size() != 1){
+            System.err.printf("必须一次性将1张装备置入装备区，而不是%s张\n", mountDeck.size());
         }
-        MountCard card = (MountCard) equipment.getCard(0);
-        Deck target = null;
+        MountCard card = (MountCard) mountDeck.getCard(0);
+        Deck targetDeck = null;
         if(card.getMountType() == MountType.March){
-            target = this.subject.getPlayerArea().getMarchMountArea().getDeck();
+            targetDeck = this.subject.getPlayerArea().getMarchMountArea().getDeck();
         } else {
-            target = this.subject.getPlayerArea().getRetreatMountArea().getDeck();
+            targetDeck = this.subject.getPlayerArea().getRetreatMountArea().getDeck();
         }
-        if(!target.isEmpty()){
-            new MoveToDiscardAreaAction(target).process(this);
+        if(!targetDeck.isEmpty()){
+            // 替换坐骑
+            new MoveToDiscardAreaAction(targetDeck).process(this);
         }
-        this.equipment.moveAllToBack(target);
+        this.mountDeck.moveAllToBack(targetDeck);
     }
 }

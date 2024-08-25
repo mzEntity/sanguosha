@@ -11,6 +11,6 @@ public class TurnStartStage extends RoleStage {
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("TurnStartStage:回合开始阶段\n");
+        Logger.printf("%s的回合开始阶段\n", this.subject);
     }
 }

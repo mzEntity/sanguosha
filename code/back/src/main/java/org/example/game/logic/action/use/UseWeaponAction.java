@@ -12,8 +12,8 @@ import org.example.game.role.Role;
  */
 public class UseWeaponAction extends Action {
 
-    private Role subject;
-    private Deck target;
+    private final Role subject;
+    private final Deck target;
 
     public UseWeaponAction(Role subject, Deck target) {
         super();

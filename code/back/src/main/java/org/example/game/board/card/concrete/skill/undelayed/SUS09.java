@@ -5,7 +5,7 @@ import org.example.game.board.card.CardIdentifier;
 import org.example.game.board.card.Suit;
 
 /**
- * @Description:
+ * @Description: 无懈可击
  * @Author: mzvltr
  * @Date: 2024/8/23
  */

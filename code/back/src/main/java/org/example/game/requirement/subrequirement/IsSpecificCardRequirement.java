@@ -19,6 +19,6 @@ public class IsSpecificCardRequirement extends CardRequirement {
 
     @Override
     public boolean isMet(LogicCard lc) {
-        return this.cardId.equals(lc.getLogicCard().cid.getId());
+        return this.cardId.equals(lc.getCid().getId());
     }
 }

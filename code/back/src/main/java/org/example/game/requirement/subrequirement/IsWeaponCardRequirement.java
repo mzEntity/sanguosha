@@ -12,6 +12,6 @@ import org.example.game.requirement.CardRequirement;
 public class IsWeaponCardRequirement extends CardRequirement {
     @Override
     public boolean isMet(LogicCard lc) {
-        return lc.getLogicCard() instanceof WeaponCard;
+        return lc.getLogicRepresentation() instanceof WeaponCard;
     }
 }

@@ -18,7 +18,7 @@ public class IsSpecificSuitRequirement extends CardRequirement {
 
     @Override
     public boolean isMet(LogicCard lc) {
-        Suit lcSuit = lc.getLogicCard().suit;
+        Suit lcSuit = lc.getSuit();
         return lcSuit == suit;
     }
 }

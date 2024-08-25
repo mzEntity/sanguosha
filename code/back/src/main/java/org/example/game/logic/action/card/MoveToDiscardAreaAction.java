@@ -11,7 +11,7 @@ import org.example.log.Logger;
  * @Date: 2024/8/13
  */
 public class MoveToDiscardAreaAction extends Action {
-    private Deck targetDeck;
+    private final Deck targetDeck;
 
     public MoveToDiscardAreaAction(Deck deck) {
         super();
