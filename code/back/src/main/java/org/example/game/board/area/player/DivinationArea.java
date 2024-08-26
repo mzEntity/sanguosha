@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DivinationArea {
-    private HashMap<DelayedSkillType, LogicCard> tasks;
+    private final HashMap<DelayedSkillType, LogicCard> tasks;
 
     public DivinationArea() {
         this.tasks = new HashMap<>();

@@ -4,15 +4,11 @@ import org.example.game.board.card.deck.Deck;
 import org.example.game.board.card.deck.LogicCard;
 import org.example.game.logic.Action;
 import org.example.game.logic.action.card.MoveToDiscardAreaAction;
-import org.example.game.logic.action.play.PlaySB01Action;
-import org.example.game.logic.action.require.RequirePlaySB01Action;
 import org.example.game.logic.action.require.RequireUseSB01Action;
 import org.example.game.logic.action.role.GetCardFromPlayerAreaAction;
-import org.example.game.logic.action.role.InjurySettleAction;
-import org.example.game.logic.action.use.PollAndUseSUS09Process;
+import org.example.game.logic.process.PollAndUseSUS09Process;
 import org.example.game.logic.action.use.UseSB01Action;
 import org.example.game.role.Role;
-import org.example.log.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,13 +33,11 @@ public class UseSUS10Action extends Action {
 
     @Override
     protected void mainLogic(Action from) {
-        new MoveToDiscardAreaAction(this.logicCard.getDeck()).process(this);
         for(List<Role> targetPair : targets) {
             Role user = targetPair.get(0);
             Role target = targetPair.get(1);
-            Logger.printf("[借刀杀人]: %s指定%s对%s使用一张杀\n", this.subject, user, target);
-            PollAndUseSUS09Process a = new PollAndUseSUS09Process(this, this.logicCard);
-            a.process();
+            PollAndUseSUS09Process a = new PollAndUseSUS09Process(this.logicCard);
+            a.process(this);
             if (a.getResult() != null) {
                 continue;
             }
@@ -56,5 +50,18 @@ public class UseSUS10Action extends Action {
                 new GetCardFromPlayerAreaAction(this.subject, user, d).process(this);
             }
         }
+        new MoveToDiscardAreaAction(this.logicCard.getDeck()).process(this);
+    }
+
+    public Role getSubject() {
+        return subject;
+    }
+
+    public List<List<Role>> getTargets() {
+        return targets;
+    }
+
+    public LogicCard getLogicCard() {
+        return logicCard;
     }
 }

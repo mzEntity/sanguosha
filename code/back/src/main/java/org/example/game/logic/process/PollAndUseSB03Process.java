@@ -1,16 +1,14 @@
-package org.example.game.logic.action.use;
+package org.example.game.logic.process;
 
 import org.example.game.Game;
 import org.example.game.board.card.deck.LogicCard;
 import org.example.game.logic.Action;
+import org.example.game.logic.LogicProcess;
 import org.example.game.logic.action.require.RequireUseSB03Action;
-import org.example.game.logic.action.require.RequireUseSUS09Action;
-import org.example.game.logic.action.use.undelayed.UseSUS09Action;
+import org.example.game.logic.action.use.UseSB03Action;
 import org.example.game.role.Role;
-import org.example.log.Logger;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,31 +17,29 @@ import java.util.List;
  * @Author: mzvltr
  * @Date: 2024/8/25
  */
-public class PollAndUseSB03Process {
-    private final Action from;
+public class PollAndUseSB03Process extends LogicProcess {
     private final Role target;
     private final int count;
 
-    public PollAndUseSB03Process(Action from, Role target, int count) {
-        this.from = from;
+    public PollAndUseSB03Process(Role target, int count) {
         this.target = target;
         this.count = count;
     }
 
-    public void process(){
+    @Override
+    public void process(Action from){
         int count = 0;
         List<Role> aliveRoles = Game.getAliveRoles();
         for(Role role : aliveRoles) {
             while(count < this.count){
-                Logger.printf("%s向%s求%d个桃\n", this.target, role, this.count - count);
                 RequireUseSB03Action r = new RequireUseSB03Action(role, this.target);
-                r.process(this.from);
+                r.process(from);
                 LogicCard result = r.getResult();
                 if (result != null) {
                     UseSB03Action u = new UseSB03Action(role, new ArrayList<>(
                             Collections.singletonList(this.target)
                     ), result);
-                    u.process(this.from);
+                    u.process(from);
                     count += 1;
                 } else {
                     break;

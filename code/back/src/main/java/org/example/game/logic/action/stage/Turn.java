@@ -1,8 +1,7 @@
-package org.example.game.logic;
+package org.example.game.logic.action.stage;
 
-import org.example.game.logic.action.stage.*;
+import org.example.game.logic.Action;
 import org.example.game.role.Role;
-import org.example.log.Logger;
 
 
 public class Turn extends Action {
@@ -39,38 +38,24 @@ public class Turn extends Action {
     protected void mainLogic(Action from) {
         if(this.subject.isAlive() && !this.turnStartStage.isSkipped()){
             this.turnStartStage.process(this);
-        } else {
-            Logger.printf("%s跳过回合开始阶段\n", this.subject.code);
         }
         if(this.subject.isAlive() && !this.preparationStage.isSkipped()){
             this.preparationStage.process(this);
-        } else {
-            Logger.printf("%s跳过准备阶段\n", this.subject.code);
         }
         if(this.subject.isAlive() && !this.divinationStage.isSkipped()){
             this.divinationStage.process(this);
-        } else {
-            Logger.printf("%s跳过判定阶段\n", this.subject.code);
         }
         if(this.subject.isAlive() && !this.drawStage.isSkipped()){
             this.drawStage.process(this);
-        } else {
-            Logger.printf("%s跳过摸牌阶段\n", this.subject.code);
         }
         if(this.subject.isAlive() && !this.punchingStage.isSkipped()){
             this.punchingStage.process(this);
-        } else {
-            Logger.printf("%s跳过出牌阶段\n", this.subject.code);
         }
         if(this.subject.isAlive() && !this.discardingStage.isSkipped()){
             this.discardingStage.process(this);
-        } else {
-            Logger.printf("%s跳过弃牌阶段\n", this.subject.code);
         }
         if(this.subject.isAlive() && !this.turnFinishStage.isSkipped()){
             this.turnFinishStage.process(this);
-        } else {
-            Logger.printf("%s跳过回合结束阶段\n", this.subject.code);
         }
     }
 

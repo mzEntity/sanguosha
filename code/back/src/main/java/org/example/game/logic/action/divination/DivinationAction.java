@@ -7,7 +7,6 @@ import org.example.game.logic.Action;
 import org.example.game.logic.action.global.SelectFromDrawAreaAction;
 import org.example.game.requirement.CardRequirement;
 import org.example.game.role.Role;
-import org.example.log.Logger;
 
 /**
  * @Description:
@@ -28,7 +27,6 @@ public class DivinationAction extends Action {
         SelectFromDrawAreaAction s = new SelectFromDrawAreaAction(1);
         s.process(this);
         this.result = s.getSelectResult();
-        Logger.printf("%s的判定结果为：%s\n", this.subject, this.result);
     }
 
     public boolean isMet(CardRequirement c){

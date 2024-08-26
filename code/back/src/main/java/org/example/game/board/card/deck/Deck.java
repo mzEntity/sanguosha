@@ -6,6 +6,7 @@ import org.example.game.board.card.Suit;
 import org.example.game.requirement.CardRequirement;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Deck {
@@ -25,6 +26,10 @@ public class Deck {
 
     public boolean isEmpty(){
         return this.cards.isEmpty();
+    }
+
+    public void shuffle(){
+        Collections.shuffle(this.cards);
     }
 
     public int moveAllToFront(Deck target){
@@ -164,6 +169,14 @@ public class Deck {
             stringBuilder.append("\n\t").append(c);
         }
         stringBuilder.append("\n)");
+        return stringBuilder.toString();
+    }
+
+    public String toStringInLine(){
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Card c: this.cards){
+            stringBuilder.append(c.toStringInLine());
+        }
         return stringBuilder.toString();
     }
 

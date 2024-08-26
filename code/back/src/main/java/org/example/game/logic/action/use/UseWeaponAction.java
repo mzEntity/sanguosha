@@ -25,4 +25,12 @@ public class UseWeaponAction extends Action {
     protected void mainLogic(Action from) {
         new MoveToWeaponAreaAction(this.subject, this.target).process(this);
     }
+
+    public Role getSubject() {
+        return subject;
+    }
+
+    public Deck getTarget() {
+        return target;
+    }
 }

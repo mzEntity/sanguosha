@@ -27,4 +27,8 @@ public class Card {
     public String toString() {
         return "Card(" + suit + ", " + point +  ", " + this.cid.getName() + ")";
     }
+
+    public String toStringInLine(){
+        return "[" + suit + " " + point + " " + this.cid.getName() + "]";
+    }
 }

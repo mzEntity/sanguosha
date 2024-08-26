@@ -2,7 +2,6 @@ package org.example.game.logic.action.stage;
 
 import org.example.game.role.Role;
 import org.example.game.logic.Action;
-import org.example.log.Logger;
 
 public class PreparationStage extends RoleStage {
     public PreparationStage(Role subject) {
@@ -11,6 +10,5 @@ public class PreparationStage extends RoleStage {
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("%s的准备阶段\n", this.subject);
     }
 }

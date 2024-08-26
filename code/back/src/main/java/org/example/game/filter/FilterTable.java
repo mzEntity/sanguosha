@@ -18,7 +18,7 @@ public class FilterTable {
     }
 
     public static List<Role> getAvailableTargets(Role subject, String filterCode){
-        List<Role> roles = Game.getRoles();
+        List<Role> roles = Game.getRolesStartedWithRole(subject);
         return getFilter(filterCode).filterTargets(subject, roles);
     }
 

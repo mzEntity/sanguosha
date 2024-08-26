@@ -48,4 +48,8 @@ public class LogicCard {
     public Card getLogicRepresentation() {
         return logicRepresentation;
     }
+
+    public String toStringInLine(){
+        return this.logicRepresentation.toStringInLine();
+    }
 }

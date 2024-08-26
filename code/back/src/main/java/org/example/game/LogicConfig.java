@@ -1,9 +1,17 @@
 package org.example.game;
 
+import org.example.game.board.card.Suit;
 import org.example.game.board.card.concrete.skill.delayed.DelayedSkillType;
 import org.example.game.filter.CompositeAndFilter;
 import org.example.game.filter.FilterTable;
 import org.example.game.filter.subfilter.*;
+import org.example.game.requirement.CompositeAndRequirement;
+import org.example.game.requirement.NotRequirement;
+import org.example.game.requirement.RequirementTable;
+import org.example.game.requirement.subrequirement.IsPointGreaterThanRequirement;
+import org.example.game.requirement.subrequirement.IsPointLessThanRequirement;
+import org.example.game.requirement.subrequirement.IsSpecificCardRequirement;
+import org.example.game.requirement.subrequirement.IsSpecificSuitRequirement;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,6 +110,15 @@ public class LogicConfig {
     }
 
     public void initCardRequirement(){
-
+        RequirementTable.setRequirement("SDS01", new CompositeAndRequirement(
+                new ArrayList<>(Arrays.asList(
+                        new IsSpecificSuitRequirement(Suit.Spade),
+                        new IsPointGreaterThanRequirement(1),
+                        new IsPointLessThanRequirement(10)
+                ))
+        ));
+        RequirementTable.setRequirement("SDS02", new NotRequirement(
+                new IsSpecificSuitRequirement(Suit.Heart)
+        ));
     }
 }

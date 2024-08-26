@@ -4,7 +4,6 @@ import org.example.game.board.card.deck.LogicCard;
 import org.example.game.logic.Action;
 import org.example.game.logic.action.card.MoveToDivinationAreaAction;
 import org.example.game.role.Role;
-import org.example.log.Logger;
 
 /**
  * @Description:
@@ -25,7 +24,18 @@ public class UseSDS02Action extends Action {
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("[乐不思蜀]: %s指定%s为目标\n", this.subject, target);
         new MoveToDivinationAreaAction(this.target, logicCard).process(this);
+    }
+
+    public Role getSubject() {
+        return subject;
+    }
+
+    public Role getTarget() {
+        return target;
+    }
+
+    public LogicCard getLogicCard() {
+        return logicCard;
     }
 }

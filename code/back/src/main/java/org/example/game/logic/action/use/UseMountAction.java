@@ -25,4 +25,12 @@ public class UseMountAction extends Action {
     protected void mainLogic(Action from) {
         new MoveToMountAreaAction(this.subject, this.target).process(this);
     }
+
+    public Role getSubject() {
+        return subject;
+    }
+
+    public Deck getTarget() {
+        return target;
+    }
 }

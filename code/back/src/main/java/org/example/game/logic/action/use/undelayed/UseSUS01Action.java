@@ -4,9 +4,8 @@ import org.example.game.board.card.deck.LogicCard;
 import org.example.game.logic.Action;
 import org.example.game.logic.action.card.MoveToDiscardAreaAction;
 import org.example.game.logic.action.role.GainHealthAction;
-import org.example.game.logic.action.use.PollAndUseSUS09Process;
+import org.example.game.logic.process.PollAndUseSUS09Process;
 import org.example.game.role.Role;
-import org.example.log.Logger;
 
 import java.util.List;
 
@@ -29,18 +28,29 @@ public class UseSUS01Action extends Action {
 
     @Override
     protected void mainLogic(Action from) {
-        new MoveToDiscardAreaAction(this.logicCard.getDeck()).process(this);
         for(Role target : targets) {
-            Logger.printf("[桃园结义]: %s指定%s为目标\n", this.subject.code, target.code);
             if(target.isFullBlood()){
                 continue;
             }
-            PollAndUseSUS09Process a = new PollAndUseSUS09Process(this, this.logicCard);
-            a.process();
+            PollAndUseSUS09Process a = new PollAndUseSUS09Process(this.logicCard);
+            a.process(this);
             if(a.getResult() != null){
                 continue;
             }
             new GainHealthAction(this.subject, target, 1).process(this);
         }
+        new MoveToDiscardAreaAction(this.logicCard.getDeck()).process(this);
+    }
+
+    public Role getSubject() {
+        return subject;
+    }
+
+    public List<Role> getTargets() {
+        return targets;
+    }
+
+    public LogicCard getLogicCard() {
+        return logicCard;
     }
 }

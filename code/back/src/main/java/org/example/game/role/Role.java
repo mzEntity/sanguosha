@@ -3,7 +3,7 @@ package org.example.game.role;
 import org.example.game.Game;
 import org.example.game.board.area.player.PlayerArea;
 import org.example.game.board.card.deck.Deck;
-import org.example.game.logic.Turn;
+import org.example.game.logic.action.stage.Turn;
 import org.example.game.role.hero.Condition;
 import org.example.game.role.hero.Hero;
 
@@ -45,7 +45,7 @@ public class Role {
     }
 
     public Deck getHandDeck(){
-        return this.playerArea.getHandArea().cards;
+        return this.playerArea.getHandArea().getDeck();
     }
 
     public void matchArea(PlayerArea playerArea){

@@ -29,9 +29,21 @@ public class UseSB03Action extends Action {
 
     @Override
     protected void mainLogic(Action from) {
-        new MoveToDiscardAreaAction(this.logicCard.getDeck()).process(this);
         for(Role target : targets) {
             new GainHealthAction(this.subject, target, 1).process(this);
         }
+        new MoveToDiscardAreaAction(this.logicCard.getDeck()).process(this);
+    }
+
+    public Role getSubject() {
+        return subject;
+    }
+
+    public List<Role> getTargets() {
+        return targets;
+    }
+
+    public LogicCard getLogicCard() {
+        return logicCard;
     }
 }

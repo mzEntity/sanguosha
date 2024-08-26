@@ -31,7 +31,11 @@ public class AreaBuilder {
         Deck discardDeck = new Deck();
         DiscardArea discardArea = new DiscardArea(discardDeck);
 
-        return new Area(playerAreaList, drawArea, discardArea);
+        // 处理区
+        Deck processDeck = new Deck();
+        ProcessArea processArea = new ProcessArea(processDeck);
+
+        return new Area(playerAreaList, drawArea, discardArea, processArea);
     }
 
     public PlayerArea buildPlayerArea(){

@@ -2,7 +2,6 @@ package org.example.game.logic.action.stage;
 
 import org.example.game.logic.Action;
 import org.example.game.role.Role;
-import org.example.log.Logger;
 
 public class TurnStartStage extends RoleStage {
     public TurnStartStage(Role subject) {
@@ -11,6 +10,5 @@ public class TurnStartStage extends RoleStage {
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("%s的回合开始阶段\n", this.subject);
     }
 }

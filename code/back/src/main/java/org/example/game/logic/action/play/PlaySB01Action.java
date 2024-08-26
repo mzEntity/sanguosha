@@ -4,7 +4,6 @@ import org.example.game.board.card.deck.LogicCard;
 import org.example.game.logic.Action;
 import org.example.game.logic.action.card.MoveToDiscardAreaAction;
 import org.example.game.role.Role;
-import org.example.log.Logger;
 
 /**
  * @Description:
@@ -23,7 +22,14 @@ public class PlaySB01Action extends Action {
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("%s打出一张[杀]\n", this.subject);
         new MoveToDiscardAreaAction(this.targetSB01.getDeck()).process(this);
+    }
+
+    public Role getSubject() {
+        return subject;
+    }
+
+    public LogicCard getTargetSB01() {
+        return targetSB01;
     }
 }

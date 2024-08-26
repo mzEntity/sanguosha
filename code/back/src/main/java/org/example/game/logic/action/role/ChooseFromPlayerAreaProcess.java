@@ -4,7 +4,6 @@ import org.example.Main;
 import org.example.game.board.card.Card;
 import org.example.game.board.card.deck.Deck;
 import org.example.game.role.Role;
-import org.example.log.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,7 +60,6 @@ public class ChooseFromPlayerAreaProcess {
         }
         int chooseCount = Math.min(targetDeckSize, count);
         Deck deck = target.selectSomeAsDeck(0, chooseCount);
-        Logger.printf("选择牌%s\n", deck);
         this.cards.put(target, deck);
         return chooseCount;
     }

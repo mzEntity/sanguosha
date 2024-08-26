@@ -1,6 +1,5 @@
 package org.example.game.logic.action.card;
 
-import org.example.game.board.card.Card;
 import org.example.game.board.card.concrete.equipment.MountCard;
 import org.example.game.board.card.concrete.equipment.mount.MountType;
 import org.example.game.board.card.deck.Deck;

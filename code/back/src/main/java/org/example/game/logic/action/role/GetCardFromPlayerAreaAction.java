@@ -26,4 +26,16 @@ public class GetCardFromPlayerAreaAction extends Action {
     protected void mainLogic(Action from) {
         new MoveToHandAreaAction(this.by, this.deck).process(this);
     }
+
+    public Role getBy() {
+        return by;
+    }
+
+    public Role getTo() {
+        return to;
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
 }

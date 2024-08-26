@@ -3,9 +3,8 @@ package org.example.game.logic.action.use.undelayed;
 import org.example.game.board.card.deck.LogicCard;
 import org.example.game.logic.Action;
 import org.example.game.logic.action.card.MoveToDiscardAreaAction;
-import org.example.game.logic.action.use.PollAndUseSUS09Process;
+import org.example.game.logic.process.PollAndUseSUS09Process;
 import org.example.game.role.Role;
-import org.example.log.Logger;
 
 /**
  * @Description:
@@ -27,14 +26,25 @@ public class UseSUS09Action extends Action{
 
     @Override
     protected void mainLogic(Action from) {
-        Logger.printf("%s使用一张[无懈可击]用于抵消%s的效果\n", this.subject.code, targetSkill.getLogicRepresentation().getCid());
-        new MoveToDiscardAreaAction(this.logicCard.getDeck()).process(this);
-        PollAndUseSUS09Process a = new PollAndUseSUS09Process(this, this.logicCard);
-        a.process();
+        PollAndUseSUS09Process a = new PollAndUseSUS09Process(this.logicCard);
+        a.process(this);
         this.beOffset = (a.getResult() != null);
+        new MoveToDiscardAreaAction(this.logicCard.getDeck()).process(this);
     }
 
     public boolean isOffset() {
         return beOffset;
+    }
+
+    public Role getSubject() {
+        return subject;
+    }
+
+    public LogicCard getTargetSkill() {
+        return targetSkill;
+    }
+
+    public LogicCard getLogicCard() {
+        return logicCard;
     }
 }

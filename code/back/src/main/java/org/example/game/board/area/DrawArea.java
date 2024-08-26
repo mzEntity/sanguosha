@@ -3,7 +3,7 @@ package org.example.game.board.area;
 import org.example.game.board.card.deck.Deck;
 
 public class DrawArea {
-    private Deck deck;
+    private final Deck deck;
 
     public DrawArea(Deck deck) {
         this.deck = deck;

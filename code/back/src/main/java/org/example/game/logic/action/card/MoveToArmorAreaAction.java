@@ -3,7 +3,6 @@ package org.example.game.logic.action.card;
 import org.example.game.board.card.deck.Deck;
 import org.example.game.logic.Action;
 import org.example.game.role.Role;
-import org.example.log.Logger;
 
 /**
  * @Description:
@@ -27,7 +26,6 @@ public class MoveToArmorAreaAction extends Action{
         Deck armorAreaDeck = this.subject.getPlayerArea().getArmorArea().getDeck();
         if(!armorAreaDeck.isEmpty()){
             // 替换装备
-            Logger.printf("%s失去了装备%s\n", this.subject, armorAreaDeck);
             new MoveToDiscardAreaAction(armorAreaDeck).process(this);
         }
         this.equipment.moveAllToBack(armorAreaDeck);

@@ -24,4 +24,12 @@ public class UseArmorAction extends Action {
     protected void mainLogic(Action from) {
         new MoveToArmorAreaAction(this.subject, this.target).process(this);
     }
+
+    public Role getSubject() {
+        return subject;
+    }
+
+    public Deck getTarget() {
+        return target;
+    }
 }

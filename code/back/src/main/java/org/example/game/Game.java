@@ -1,13 +1,13 @@
 package org.example.game;
 
-import org.example.game.logic.Turn;
 import org.example.game.logic.Action;
 import org.example.game.board.Board;
 import org.example.game.board.card.Card;
 import org.example.game.board.card.deck.Deck;
+import org.example.game.logic.action.card.GetCardFromDrawAreaAction;
+import org.example.game.logic.process.DrawCardProcess;
 import org.example.game.role.Role;
 import org.example.game.role.hero.Hero;
-import org.example.log.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +35,9 @@ public class Game extends Action {
     }
 
     public boolean start(){
-        for(Card c: this.cards){
-            Logger.printf("%s\n", c);
-        }
+//        for(Card c: this.cards){
+//            Logger.printf("%s\n", c);
+//        }
 
         for(Role role: this.roles){
             role.setHero(new Hero(3, 3, "Default Hero"));
@@ -57,8 +57,23 @@ public class Game extends Action {
         return game.board.area.drawArea.getDeck();
     }
 
+    public static Deck getProcessDeck(){
+        return game.board.area.processArea.getDeck();
+    }
+
     public static List<Role> getRoles(){
         return game.roles;
+    }
+
+    public static List<Role> getRolesStartedWithRole(Role role){
+        List<Role> roles = new ArrayList<>();
+        int roleCount = game.roles.size();
+        int startIndex = game.roles.indexOf(role);
+        for(int i = 0; i < roleCount; i++){
+            Role r = game.roles.get((i + startIndex) % roleCount);
+            roles.add(r);
+        }
+        return roles;
     }
 
     public static Role getAliveNext(Role subject){
@@ -97,12 +112,13 @@ public class Game extends Action {
     @Override
     protected void mainLogic(Action from) {
         this.currentRoundNo = 0;
+        for(Role r: roles){
+            new DrawCardProcess(r, 4).process(this);
+        }
         for(int i = 0; i < 50; i++){
             for(Role r: roles){
                 if(r.isAlive()){
                     r.getTurnByRoundNo(this.currentRoundNo).process(this);
-                } else {
-                    Logger.printf("玩家%s已死亡，跳过回合\n", r.code);
                 }
             }
             this.currentRoundNo += 1;

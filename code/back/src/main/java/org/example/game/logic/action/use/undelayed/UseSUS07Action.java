@@ -2,12 +2,10 @@ package org.example.game.logic.action.use.undelayed;
 
 import org.example.game.board.card.deck.LogicCard;
 import org.example.game.logic.Action;
-import org.example.game.logic.action.card.DrawCardAction;
 import org.example.game.logic.action.card.MoveToDiscardAreaAction;
-import org.example.game.logic.action.role.GainHealthAction;
-import org.example.game.logic.action.use.PollAndUseSUS09Process;
+import org.example.game.logic.process.PollAndUseSUS09Process;
+import org.example.game.logic.process.DrawCardProcess;
 import org.example.game.role.Role;
-import org.example.log.Logger;
 
 import java.util.List;
 
@@ -30,15 +28,26 @@ public class UseSUS07Action extends Action {
 
     @Override
     protected void mainLogic(Action from) {
-        new MoveToDiscardAreaAction(this.logicCard.getDeck()).process(this);
         for(Role target : targets) {
-            Logger.printf("[无中生有]: %s指定%s为目标\n", this.subject, target);
-            PollAndUseSUS09Process a = new PollAndUseSUS09Process(this, this.logicCard);
-            a.process();
+            PollAndUseSUS09Process a = new PollAndUseSUS09Process(this.logicCard);
+            a.process(this);
             if(a.getResult() != null){
                 continue;
             }
-            new DrawCardAction(target, 2).process(this);
+            new DrawCardProcess(target, 2).process(this);
         }
+        new MoveToDiscardAreaAction(this.logicCard.getDeck()).process(this);
+    }
+
+    public Role getSubject() {
+        return subject;
+    }
+
+    public List<Role> getTargets() {
+        return targets;
+    }
+
+    public LogicCard getLogicCard() {
+        return logicCard;
     }
 }

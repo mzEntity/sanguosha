@@ -8,7 +8,7 @@ import org.example.game.board.card.deck.Deck;
  * @Date: 2024/8/23
  */
 public class MountArea {
-    private Deck deck;
+    private final Deck deck;
 
     public MountArea(Deck deck) {
         this.deck = deck;
