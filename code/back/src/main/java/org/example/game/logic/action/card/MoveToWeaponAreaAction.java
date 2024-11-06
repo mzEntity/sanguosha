@@ -3,6 +3,7 @@ package org.example.game.logic.action.card;
 import org.example.game.board.card.deck.Deck;
 import org.example.game.logic.Action;
 import org.example.game.role.Role;
+import org.example.view.Logger;
 
 /**
  * @Description:
@@ -23,6 +24,7 @@ public class MoveToWeaponAreaAction extends Action {
         if(weapon.size() != 1){
             System.err.printf("必须一次性将1张装备置入装备区，而不是%s张\n", weapon.size());
         }
+        Logger.log("%s装备了%s\n", this.subject, this.weapon.toStringInLine());
         Deck targetDeck = this.subject.getPlayerArea().getWeaponArea().getDeck();
         if(!targetDeck.isEmpty()){
             // 替换武器

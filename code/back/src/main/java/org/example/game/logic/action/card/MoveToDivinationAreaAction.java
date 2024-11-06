@@ -8,6 +8,7 @@ import org.example.game.board.card.deck.Deck;
 import org.example.game.board.card.deck.LogicCard;
 import org.example.game.logic.Action;
 import org.example.game.role.Role;
+import org.example.view.Logger;
 
 /**
  * @Description:
@@ -30,6 +31,7 @@ public class MoveToDivinationAreaAction extends Action {
         if(taskDeck.size() != 1){
             System.err.println("延时锦囊只能用一张牌表示");
         }
+        Logger.log("%s进入%s的判定区\n", taskDeck.toStringInLine(), this.subject);
         DelayedSkillCard c = (DelayedSkillCard) this.divinationTask.getLogicRepresentation();
         DelayedSkillType type = c.getType();
         DivinationArea area = this.subject.getPlayerArea().getDivinationArea();

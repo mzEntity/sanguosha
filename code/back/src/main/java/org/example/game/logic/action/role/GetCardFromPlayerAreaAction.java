@@ -4,6 +4,7 @@ import org.example.game.board.card.deck.Deck;
 import org.example.game.logic.Action;
 import org.example.game.logic.action.card.MoveToHandAreaAction;
 import org.example.game.role.Role;
+import org.example.view.Logger;
 
 /**
  * @Description:
@@ -24,6 +25,7 @@ public class GetCardFromPlayerAreaAction extends Action {
 
     @Override
     protected void mainLogic(Action from) {
+        Logger.log("%s获得了%s的%s\n", this.by, this.to, this.deck.toStringInLine());
         new MoveToHandAreaAction(this.by, this.deck).process(this);
     }
 

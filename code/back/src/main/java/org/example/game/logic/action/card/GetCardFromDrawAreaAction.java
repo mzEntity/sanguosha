@@ -4,6 +4,7 @@ import org.example.game.logic.Action;
 import org.example.game.board.card.deck.Deck;
 import org.example.game.logic.action.global.SelectFromDrawAreaAction;
 import org.example.game.role.Role;
+import org.example.view.Logger;
 
 /**
  * @Description: 摸牌
@@ -22,6 +23,7 @@ public class GetCardFromDrawAreaAction extends Action {
 
     @Override
     protected void mainLogic(Action from) {
+        Logger.log("%s从牌堆中获得了%s\n", this.subject, this.deck.toStringInLine());
         new MoveToHandAreaAction(this.subject, this.deck).process(this);
     }
 

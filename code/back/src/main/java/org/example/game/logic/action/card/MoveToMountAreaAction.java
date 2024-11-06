@@ -5,6 +5,7 @@ import org.example.game.board.card.concrete.equipment.mount.MountType;
 import org.example.game.board.card.deck.Deck;
 import org.example.game.logic.Action;
 import org.example.game.role.Role;
+import org.example.view.Logger;
 
 /**
  * @Description:
@@ -25,6 +26,7 @@ public class MoveToMountAreaAction extends Action {
         if(mountDeck.size() != 1){
             System.err.printf("必须一次性将1张装备置入装备区，而不是%s张\n", mountDeck.size());
         }
+        Logger.log("%s装备了%s\n", this.subject, this.mountDeck.toStringInLine());
         MountCard card = (MountCard) mountDeck.getCard(0);
         Deck targetDeck = null;
         if(card.getMountType() == MountType.March){

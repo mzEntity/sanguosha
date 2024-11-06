@@ -1,6 +1,7 @@
 package org.example.game.logic.action.global;
 
 import org.example.game.logic.Action;
+import org.example.view.Logger;
 
 /**
  * @Description: 游戏结束
@@ -18,6 +19,7 @@ public class GameOverAction extends Action {
 
     @Override
     protected void mainLogic(Action from) {
+        Logger.log("%s, 游戏结束\n", this.msg);
         System.exit(0);
     }
 

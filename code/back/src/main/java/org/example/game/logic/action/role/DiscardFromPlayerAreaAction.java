@@ -2,9 +2,11 @@ package org.example.game.logic.action.role;
 
 import org.example.game.board.card.deck.Deck;
 import org.example.game.logic.Action;
+import org.example.game.logic.action.card.DiscardAction;
 import org.example.game.logic.action.card.MoveToDiscardAreaAction;
 import org.example.game.logic.action.card.MoveToHandAreaAction;
 import org.example.game.role.Role;
+import org.example.view.Logger;
 
 /**
  * @Description:
@@ -25,7 +27,8 @@ public class DiscardFromPlayerAreaAction extends Action {
 
     @Override
     protected void mainLogic(Action from) {
-        new MoveToDiscardAreaAction(this.deck).process(this);
+        Logger.log("%s弃置%s%s\n", this.by, this.to, this.deck.toStringInLine());
+        new DiscardAction(this.to, this.deck).process(this);
     }
 
     public Role getBy() {

@@ -2,6 +2,7 @@ package org.example.game.logic.action.stage;
 
 import org.example.game.logic.Action;
 import org.example.game.role.Role;
+import org.example.view.Logger;
 
 
 public class Turn extends Action {
@@ -36,6 +37,7 @@ public class Turn extends Action {
 
     @Override
     protected void mainLogic(Action from) {
+        Logger.log("%s的回合开始\n", this.subject);
         if(this.subject.isAlive() && !this.turnStartStage.isSkipped()){
             this.turnStartStage.process(this);
         }

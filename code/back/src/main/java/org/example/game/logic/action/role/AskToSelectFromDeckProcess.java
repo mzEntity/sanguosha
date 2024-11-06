@@ -1,5 +1,6 @@
 package org.example.game.logic.action.role;
 
+import org.example.Main;
 import org.example.game.board.card.deck.Deck;
 import org.example.game.role.Role;
 
@@ -26,7 +27,12 @@ public class AskToSelectFromDeckProcess {
             System.err.println("牌不够选择！\n");
             return;
         }
-        this.result = this.targetDeck.selectSomeAsDeck(0, count);
+        if(!Main.SGS_DEBUG){
+            //TODO: for user
+            return;
+        } else {
+            this.result = this.targetDeck.selectSomeAsDeck(0, count);
+        }
     }
 
     public Deck getResult() {

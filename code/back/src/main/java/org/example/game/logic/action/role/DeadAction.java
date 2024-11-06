@@ -6,6 +6,7 @@ import org.example.game.logic.Action;
 import org.example.game.logic.action.card.MoveToDiscardAreaAction;
 import org.example.game.logic.action.global.GameOverAction;
 import org.example.game.role.Role;
+import org.example.view.Logger;
 
 /**
  * @Description:
@@ -23,8 +24,9 @@ public class DeadAction extends Action {
     @Override
     protected void mainLogic(Action from) {
         this.subject.die();
+        Logger.log("%s死亡\n", this.subject);
         if(Game.getGame().noMoreThanOneLeft()){
-            new GameOverAction("仅剩一人及以下存活，游戏结束").process(this);
+            new GameOverAction("仅剩一人及以下存活").process(this);
         }
         this.clearArea();
     }

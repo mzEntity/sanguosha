@@ -4,6 +4,7 @@ import org.example.game.board.card.deck.LogicCard;
 import org.example.game.logic.Action;
 import org.example.game.logic.action.card.MoveToDiscardAreaAction;
 import org.example.game.role.Role;
+import org.example.view.Logger;
 
 /**
  * @Description:
@@ -22,6 +23,7 @@ public class PlaySB02Action extends Action {
 
     @Override
     protected void mainLogic(Action from) {
+        Logger.log("%s打出了%s\n", this.subject, this.targetSB02.toStringInLine());
         new MoveToDiscardAreaAction(this.targetSB02.getDeck()).process(this);
     }
 

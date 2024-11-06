@@ -8,6 +8,7 @@ import org.example.game.logic.action.card.MoveToDivinationAreaAction;
 import org.example.game.logic.action.role.InjurySettleAction;
 import org.example.game.requirement.RequirementTable;
 import org.example.game.role.Role;
+import org.example.view.Logger;
 
 /**
  * @Description:
@@ -29,13 +30,16 @@ public class SDS01WorkAction extends Action{
     @Override
     public void mainLogic(Action from) {
         if(this.divination == null){
+            Logger.log("%s的[闪电]失效\n", this.subject);
             new MoveToDivinationAreaAction(Game.getAliveNext(this.subject), this.targetSDS01).process(this);
         } else {
             if(this.divination.isMet(RequirementTable.getRequirement("SDS01"))){
+                Logger.log("%s的[闪电]生效\n", this.subject);
                 new InjurySettleAction(null, this.subject, 3).process(this);
                 new MoveToDiscardAreaAction(divination.getResult()).process(this);
                 new MoveToDiscardAreaAction(this.targetSDS01.getDeck()).process(this);
             } else {
+                Logger.log("%s的[闪电]失效\n", this.subject);
                 new MoveToDiscardAreaAction(divination.getResult()).process(this);
                 new MoveToDivinationAreaAction(Game.getAliveNext(this.subject), this.targetSDS01).process(this);
             }

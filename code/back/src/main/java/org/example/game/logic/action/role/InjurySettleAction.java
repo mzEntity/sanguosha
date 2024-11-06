@@ -5,6 +5,7 @@ import org.example.game.logic.process.DyingProcess;
 import org.example.game.logic.trigger.TriggerBuilder;
 import org.example.game.logic.trigger.TriggerManager;
 import org.example.game.role.Role;
+import org.example.view.Logger;
 
 /**
  * @Description:
@@ -27,6 +28,7 @@ public class InjurySettleAction extends Action {
 
     @Override
     protected void mainLogic(Action from) {
+        Logger.log("%s对%s造成了%d点伤害\n", this.by, this.to, this.count);
         this.to.loseHp(this.count);
         boolean isDying = this.to.isDying();
         if(isDying){

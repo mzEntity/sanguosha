@@ -3,6 +3,7 @@ package org.example.game.logic.action.global;
 import org.example.game.Game;
 import org.example.game.logic.Action;
 import org.example.game.board.card.deck.Deck;
+import org.example.view.Logger;
 
 /**
  * @Description:
@@ -26,9 +27,10 @@ public class SelectFromDrawAreaAction extends Action {
             new ReshuffleAction().process(this);
         }
         if(drawDeck.size() < selectCount) {
-            new GameOverAction("牌堆不足，游戏结束").process(this);
+            new GameOverAction("牌堆不足").process(this);
         }
         this.selectResult = drawDeck.selectSomeAsDeck(0, this.selectCount);
+        Logger.log("牌堆顶的%d张牌为%s\n", this.selectCount, this.selectResult.toStringInLine());
     }
 
     public Deck getSelectResult() {

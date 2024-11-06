@@ -3,6 +3,7 @@ package org.example.game.logic.action.card;
 import org.example.game.logic.Action;
 import org.example.game.board.card.deck.Deck;
 import org.example.game.role.Role;
+import org.example.view.Logger;
 
 /**
  * @Description:
@@ -21,6 +22,7 @@ public class DiscardAction extends Action {
 
     @Override
     protected void mainLogic(Action from) {
+        Logger.log("%s弃置了%s\n", this.subject, this.discard.toStringInLine());
         new MoveToDiscardAreaAction(this.discard).process(this);
     }
 

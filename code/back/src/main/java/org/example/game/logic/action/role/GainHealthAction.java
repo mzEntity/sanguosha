@@ -4,6 +4,7 @@ import org.example.game.logic.Action;
 import org.example.game.logic.trigger.TriggerBuilder;
 import org.example.game.logic.trigger.TriggerManager;
 import org.example.game.role.Role;
+import org.example.view.Logger;
 
 /**
  * @Description:
@@ -30,6 +31,7 @@ public class GainHealthAction extends Action {
             System.err.println("回复的血量超过体力上限，出错了");
             return;
         }
+        Logger.log("%s令%s回复%d点体力\n", this.by, this.to, this.count);
         this.to.gainHp(this.count);
     }
 
